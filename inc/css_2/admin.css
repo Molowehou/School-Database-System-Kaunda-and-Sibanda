@@ -1,0 +1,38 @@
+
+    .blocks {
+        display: grid;
+        height:100vh;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+		grid-gap:10px;
+    }
+	
+	#b_1 {
+		
+		background:red;
+	}
+
+	#b_2 {
+		
+		background:blue;
+	}
+
+	#b_3 {
+		
+		background:yellow;
+	}
+
+	#b_4 {
+		
+		background:orange;
+	}
+
+	#b_5 {
+		
+		background:brown;
+	}
+	
+	#b_6 {
+		
+		background: pink;
+	}

@@ -1,0 +1,152 @@
+
+.form-control{
+
+}
+
+
+.studentCard{
+	height: 30px;
+	width: 50px;
+	background-color: white;
+}
+
+.btn{
+margin-top: 1px;
+margin-left:0px;
+width: 40%;
+height: 35px;
+display:inline-block;
+
+}
+
+#btnlogin{
+margin-top: 1px;
+margin-left:500px;
+width: 80px;
+height: 35px;
+display:inline-block;
+margin-top:15px;
+text-align:top;
+margin-top:25px;	
+}
+
+#btnlogout{
+margin-left:0px;
+width: 85px;
+height: 35px;
+display:inline-block;
+margin-top:15px;
+text-align:top;
+margin-top:25px;	
+}
+
+#btnChange{
+margin-left:350px;
+width: 180px;
+height: 35px;
+display:inline-block;
+margin-top:15px;
+text-align:top;
+margin-top:25px;
+margin-right:2px;
+}
+
+#editbtn{
+	width: 70px;
+    background-color: blue;
+
+}
+
+#deletebtn{
+background-color: #ff0000;
+width: 70px;
+
+}
+
+
+
+
+label,h2{
+	color:#005d61;
+	/*font-size:12px;*/
+}
+
+
+.modal-body{
+	background-color: #1f2833;
+}
+
+.row{
+	background-color: #1f2833;
+}
+
+.form-control{
+	margin-bottom:1px;
+	margin-top:1px;
+}
+
+#btnSave{
+	width:180px;
+	background-color:blue;
+}
+#btnCancel{
+	width:180px;
+	background-color:red;
+	margin-left:400px;
+}
+
+
+.well{
+	margin-top: 30px;
+background-color: #1f2833;
+
+}
+
+.form-signin-heading{
+	color:#005d61;
+}
+
+#logout{
+	width:100%;
+	background-color:red;
+
+}
+
+#changepwd{
+	width:100%;
+	margin-bottom:5px;
+}
+
+div.col-sm-9 input {
+	max-width: 100%;
+	width:100%;
+	
+}
+
+div.col-sm-9 {
+	width:calc(70% - 30px);
+}
+
+label.control-label {
+	max-width: 100%;
+	font-size: 1em;
+	color: #66fcf1;
+	width:calc(35% - 30px);	
+}
+
+.form_title {
+	font-size: 2em;
+}
+
+.form-group {
+	margin-bottom: .5rem;
+}
+
+.row {
+	margin: 0 5px;
+	border-radius: 3px;
+}
+
+.reg_form {
+	background:#c5c6c7; 
+}

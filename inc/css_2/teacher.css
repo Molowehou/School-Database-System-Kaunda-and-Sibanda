@@ -1,0 +1,287 @@
+/* ================================= 
+  Base Element Styles
+==================================== */
+
+* {
+	box-sizing: border-box;
+	text-align:center;
+}
+
+
+p {
+	font-size: .95em;
+}
+
+
+h2,
+h3 {
+	margin-top: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	max-width: 100%;
+}
+
+/******************************************
+			Teacher page
+*******************************************/
+
+			/*Header*/
+
+header {
+	background:#1f2833;
+	padding: 0 2em;
+}
+
+			
+#header_content h1.title a {
+	float:left;
+	padding: 1rem;
+	text-shadow: -1px -1px 2px #1f2833,1px 1px 2px #66fcf1;
+}
+
+			/*Nav menu*/
+			
+.main-nav {
+	padding: .5em 1em;
+	background:#1f2833;
+	box-shadow: -1px -1px 2px #1f2833,1px 1px 2px #66fcf1;
+	z-index:99;
+	width: 
+	}
+
+ul#menu div {
+	
+}
+
+#menu li {
+	background:#1f2833;
+	height: 2.5em;
+	line-height: 2.5px;
+	border:1px solid #1f2833;
+	border-radius:5px;
+	box-shadow: -1px -1px 2px #1f2833,1px 1px 2px #66fcf1;
+	margin-bottom: .3rem;
+	text-align:left;
+	/* width:100%; */
+}
+
+.child {
+	margin-left: 2em;
+	font-size: .9rem;
+}
+
+#menu .selected {
+	background: #008ec2;
+	border: 1px solid #008ec2;
+}
+
+div a {
+	display:inline-block;
+	padding: 1rem 0 1rem .2rem;
+	width:100%;
+	text-align:left;
+	color:#c5c6c7;
+	
+}
+
+#menu li:active{
+	box-shadow:inset 1px 1px 2px #1f2833;
+}
+
+#menu li:hover {
+	background: #008ec2;
+	height: 3em;
+	/* width:110%; */
+	transition: 50ms background ease-in-out;
+	box-shadow: 1px 1px 2px #1f2833;
+	transition-duration: 0.4s;
+	color: #fff;
+}
+			
+			/*Time table*/
+			
+.timetable {
+	padding-bottom: 1em;
+}
+
+.table {
+	width:95%;
+	margin:.5em auto;
+	border:1px solid #1f2833;
+	border-radius:5px;
+	box-shadow: -1px -1px 2px #1f2833;
+}
+
+
+tr > th {
+
+	padding: .7em .3em;
+	color: #c5c6c7;
+	background:#1f2833;	
+	border-bottom: 1px solid #f6f6f6;
+	/* to be moved */
+	border-left: 1px solid #f6f6f6;
+}
+
+#empty-cell {
+	border: hidden;
+	background: #c5c6c7;
+	box-shadow: -1px -3px 1px #c5c6c7;
+	/* box-shadow: -1px -1px 2px #1f2833; */
+}
+
+.section-title {
+	background:#1f2833;
+	padding:1em;
+	border:1px solid #1f2833;
+	border-radius:5px;
+	box-shadow: -1px -1px 2px #1f2833;
+	text-shadow: -1px -1px 2px #1f2833,1px 1px 2px #66fcf1;
+}
+
+table .headings {
+	background: #0b0c10;
+	color: #45a29e;
+	font-weight: bold;
+}
+
+tr > td {
+	border: 1px solid #c5c5c5;
+	background: #f6f6f6;
+	font-weight: normal;
+	color: #454545;
+}
+
+		
+			
+			/*Schemes*/
+			
+			/*Sidebar*/
+			
+h2.sidebar_title {
+	background:#1f2833;
+	padding:.5em;
+	font-size: 1em;}
+
+.sidebar {
+	background:#c5c6c7;
+	border:1px solid #1f2833;
+	border-radius:5px;
+	box-shadow: -1px -1px 2px #1f2833;
+	margin-bottom: 3em;
+}	
+
+.sidebar:nth-child(2) {
+	margin-top: 1em;
+}		
+
+			/*Noticeboard*/
+.sb_common_1 {
+	text-align:left;
+	font-size: .8em;
+	padding-left: 1em;
+}
+
+#ue_date,
+#nb_title {
+	background: #0b0c10;
+	font-size: .8em;
+	color: #c5c6c7;
+	margin-bottom:0;
+}
+
+#nb_content,
+#ue_description {
+	font-size: .8em;
+	color: #0b0c10;
+	padding: .3em;
+	margin-top: .2em;
+}
+
+#nb_author {
+	margin-top: 0;
+}
+		
+			/*Upcoming Events*/
+			
+#ue_time {
+	color: #1f2833;
+	margin-top: .2em;	
+}		
+			
+			
+			/*Footer*/
+			
+footer {
+	background:rgba(31, 40, 51, .7);
+	color: #c5c6c7;
+}
+
+
+
+			
+/* ================================= 
+  Media Queries
+==================================== */
+
+@media (min-width: 465px) {
+	
+	.sidebar {
+		width: 40%;
+		margin: 1em 5%; 
+	}
+	
+	.noticeboard {
+		float:left;
+		margin-top:1em;
+	}
+	
+	.events {
+		float:right;
+	}
+}
+
+@media (min-width: 762px) {
+	
+	
+	h1.title {
+		float:left;
+	}
+
+	#log_out,
+	#log_in {
+		float:right;
+		width: 100px;
+
+	}
+	
+	.sidebar {
+		width: 95%;
+		margin-right: 3%; 
+		margin-left: 2%;
+		margin-bottom: 3em;
+	}
+	
+	.noticeboard {
+		float:none;
+		margin-top: 0;
+	}
+	
+	.events {
+		float:none;
+	}
+	/* ---- Float clearfix ---- */
+
+	.clearfix::after {
+		content: " ";
+		display: table;
+		clear: both;
+}
+
+}
+

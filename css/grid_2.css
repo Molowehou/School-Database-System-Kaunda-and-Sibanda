@@ -1,0 +1,40 @@
+
+.container {
+        display: grid;
+        height: 100vh;
+        grid-template-columns: 20% 1fr;
+        grid-template-rows: auto 1fr 1fr 50px;
+		grid-gap:10px;
+    }
+	
+	header {
+		grid-column: 1 / -1;
+		grid-row: 1 / 2;
+		
+	}
+
+	nav {
+		grid-column: 1 / 2;
+		grid-row: 2 / 4;
+		
+	}
+
+	main {
+		grid-column: 2 / 3;
+		grid-row: 2 / 3;
+		
+	}
+
+	aside {
+		grid-column: 2 / 3;
+		grid-row: 3 / 4;
+		
+	}
+
+	footer {
+		grid-column: 1 / -1;
+		grid-row: 4 / -1;
+	}
+	
+	
+}

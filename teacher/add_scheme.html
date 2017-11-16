@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Dashboard
+        <!-- can we show selectd nav item as title? -->
+    </title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="css/bootstrap.css" rel="stylesheet"> -->
+    <link href="../css/normalize.css" rel="stylesheet">
+    <link href="../css/main.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+   
+    <!-- <link href="jquery-ui.css" rel="stylesheet"> -->
+    <link href="../css/grid.css" rel="stylesheet">
+	<link href="../css/teacher.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container">
+		<header class="clearfix">
+			<div id="header_content" class="clearfix">
+				<h1 class="title">
+					<!-- Name of user--><a href="teacher.html">John Dube</a></h1>
+				<input type="submit" name="log_out" id="log_out" value="Logout">
+			</div>
+		</header>
+		<!-- Nav  for all pages -->
+
+		<!-- The delete option shouldnt delete the teacher, student from the database but it disables the accounts of either the teacher of student, because we want the info to remain for later use. -->
+		
+			<nav class="main-nav">
+				
+				<ul id="menu">
+					
+					<li><a href="<!-- php code to list schemes page -->">Schemes</a></li>
+					<li class="child"><a href="add_scheme.html">Add Schemes</a></li>
+					
+					<li><a href="<!-- php code to list classes page -->">Marksheet</a></li>
+						<!-- 	When you click here you should see an input boxes(Class, Subject) and upon submitting that form a new page should show up listing all students in that class with their marks, (columns will be name of student, test date and total mark) -->
+					<li class="child"><a href="add_marksheet.html">Add Marks</a></li>
+
+				</ul>
+			</nav>
+			<main>
+				
+				<form>
+					<span>Select Class: </span>
+					<select name="class">
+						<option value="">1a1</option>
+						<option value="">1a2</option>
+						<option value="">2a1</option>
+						<option value="">2a2</option>
+						<option value="">2a3</option>
+					</select>
+					
+					
+					<span>Select subject: </span>
+					<select name="subject">
+					<!-- Add php code that lists the subjects the teacher teaches -->
+						<option value="">Computers</option>
+						<option value="">Maths</option>
+					</select>
+					<span>Pick a weekending: </span>
+					<input type="date">
+					<br/>
+					<span>Enter topics and their descriptions: </span>
+					   <textarea id="scheme_entry" name="message" rows="10" cols="60">
+						Html- Tags, Adding links to pages and Adding images to webpages
+						</textarea>
+					
+					
+				</form>
+				
+			</main>
+			<aside>
+
+				<div class="noticeboard sidebar">
+
+					<h2 class="sidebar_title" title="Notices posted by staff members">Noticeboard</h2>
+					
+					<div id="notice">
+						<h3 id="nb_title" class="sb_common_1 ">Meeting</h3>
+						<p id="nb_content">Career guidance meeting</p>
+						<p id="nb_author" class="sb_common_1">Mr Dube</p>
+					</div>
+					<div id="notice">
+						<h3 id="nb_title" class="sb_common_1 ">Meeting</h3>
+						<p id="nb_content">General meeting to be held in the the staff room at 1000hrs</p>
+						<p id="nb_author" class="sb_common_1">Mrs Ndlovu</p>
+					</div>
+				</div>
+
+
+				<div class="events sidebar">
+
+					<h2 class="sidebar_title" title="This week's upcoming events">Upcoming Events</h2>
+					
+					<div id="event">
+						<h3 id="ue_date" class="sb_common_1">13/02/2018</h3>
+						<p id="ue_time" class="sb_common_1 ">1000 - 1600</p>
+						<p id="ue_description">Inter-district Athletics competition</p>
+					</div>
+					<div id="event">
+						<h3 id="ue_date" class="sb_common_1">25/02/2018</h3>
+						<p id="ue_time" class="sb_common_1 ">1400 - 1630</p>
+						<p id="ue_description">School Cleanup</p>
+					</div>
+
+				</div>
+
+			</aside>
+		
+		<footer>
+
+			<div class="main_footer">
+				<p>&copy; ZimSchola Hub 2017</p>
+			</div>
+
+			<script src="../js/jquery.js"></script>
+			<script src="../js/jquery-ui.js"></script>
+			<script src="../js/script.js"></script>
+		</footer>
+	</div>
+	<script>
+	
+	
+	</script>
+	
+</body>
+
+</html>

@@ -1,0 +1,271 @@
+* {
+		box-sizing: border-box;
+}
+
+body {
+	background: #c5c6c7;
+	min-width: 0;
+	color: #66fcf1;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+	font-size: 100%;
+	line-height: 1.4em;
+}
+
+/******************************************
+			Login page
+*******************************************/
+
+/* Main form container */
+
+.wrapper form {
+	margin-top: 20px;
+	margin-left: 0;
+	padding: 26px 24px 46px;
+	background: #1f2833;
+	box-shadow: -1px -1px 5px rgba(0,0,0,.70);
+	overflow: hidden;
+	border-radius:5px;
+}
+
+#log_form{
+	width: 320px;
+	padding: 10% 0 0;
+	margin: auto;
+	text-align: center;
+}
+
+/* Form nputs */
+
+#log_form label {
+	display:inline-block;
+	font-weight:bold;
+	padding-bottom: .5em;
+	
+}
+
+#log_in,
+#log_out,
+input[type=submit],
+.btn  {
+	background:#1f2833;
+	color:#c5c6c7;
+	width:50%;
+	height: 2.5em;
+	line-height: 2.5px;
+	border:1px solid #1f2833;
+	margin-top:1.5em;
+	padding: 0 1em .2em;
+	border-radius:5px;
+	vertical-align: baseline;
+	box-shadow: 1px 1px 2px #1f2833,-1px -1px 2px #66fcf1;
+	text-shadow: 0 -1px 1px #006799,1px 0 1px #006799,0 1px 1px #006799,-1px 0 1px #006799;
+}
+
+#log_in:hover,
+#log_out:hover,
+input[type=submit]:hover {
+	box-shadow: 1px 1px 2px #1f2833;
+	transition-duration: 0.4s;
+	background: #008ec2;
+	border-color: #006799;
+	color: #fff;
+}
+
+#log_in:active,
+#log_out:active,
+input[type=submit]:active {
+	box-shadow:inset 1px 1px 2px #1f2833;
+}
+
+#log_form input[type=text],
+#log_form input[type=password]{
+	width: 250px;
+	height: 35px;
+	background: #c5c6c7;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+	/*text-indent: 32px;*/
+	box-shadow: inset 3px 3px 4px rgba(0,0,0,.5);
+	
+}
+
+#log_form input[type=text]:focus,
+#log_form input[type=password]:focus,
+input[type=text]:focus,
+textarea:focus,
+#log_form input[type=text]:hover,
+#log_form input[type=password]:hover,
+input[type=text]:hover,
+textarea:hover {
+	transition: 50ms background-color ease-in-out;
+	background-color: #fff;
+}
+
+
+#user_icon,
+#key_icon {
+	position:relative;
+	z-index:2;
+	margin-left:20px;
+	margin-top: -25px;
+	cursor:pointer;
+	color:black;
+	float:left;
+}
+
+/******************************************
+			End of Login page
+*******************************************/
+
+/******************************************
+			Sidebar
+*******************************************/
+aside {
+	height: 100vh;
+	background: red;
+	
+}
+h2.sidebar_title {
+	background:#1f2833;
+	padding:.5em;
+	font-size: 1em;}
+
+.sidebar {
+	background:#c5c6c7;
+	border:1px solid #1f2833;
+	border-radius:5px;
+	box-shadow: -1px -1px 2px #1f2833;
+	margin-bottom: 3em;
+}	
+
+.sidebar:nth-child(2) {
+	margin-top: 1em;
+}		
+
+			/*Noticeboard*/
+.sb_common_1 {
+	text-align:left;
+	font-size: .8em;
+	padding-left: 1em;
+}
+
+#ue_date,
+#nb_title {
+	background: #0b0c10;
+	font-size: .8em;
+	color: #c5c6c7;
+	margin-bottom:0;
+}
+
+#nb_content,
+#ue_description {
+	font-size: .8em;
+	color: #0b0c10;
+	padding: .3em;
+	margin-top: .2em;
+}
+
+#nb_author {
+	margin-top: 0;
+}
+		
+			/*Upcoming Events*/
+			
+#ue_time {
+	color: #1f2833;
+	margin-top: .2em;	
+}		
+	/* add scrollbar to each side bar element */
+.scroll {
+	
+	
+}
+
+/******************************************
+			Sidebar
+*******************************************/
+
+
+/******************************************
+			Landing Dashboard page
+*******************************************/
+
+.tool {
+	cursor: help;
+	position:relative;
+}
+
+.tool::before,
+.tool::after {
+	position: absolute;
+	left:50%;
+	opacity: 0;
+	z-index:-100;
+}
+
+.tool:hover::before,
+.tool:focus::before,
+.tool:hover::after,
+.tool:focus::after {
+	opacity:1;
+	z-index: 100;
+}
+
+.tool::before {
+	border-style: solid;
+	border-width: 1em .75em 0 .75em;
+	border-color: #3e474f transparent transparent transparent;
+	bottom: 60%;
+	margin-left: -.5em;
+	content: "";
+}
+
+.tool::after {
+	background: #3e474f;
+	border-radius: .25em;
+	bottom: 90%;
+	color: #edeff0;
+	width: auto;
+	font-size:.6em;
+	padding:.5em; 
+	margin-left: -8.75em;
+	content: attr(data-tip);
+}
+
+.ui-tooltip {
+	padding: 8px;
+	position: absolute;
+	z-index: 9999;
+	max-width: 300px;
+}
+body .ui-tooltip {
+	border-width: 2px;
+}
+
+/******************************************
+			General styles
+*******************************************/
+
+input#submit,
+.btn {
+	width: 7rem;
+	margin-left: 3em;
+	height:1.2rem;
+	padding: .7em;
+}
+
+input[type=text],
+textarea {
+	width: ;
+	height: 35px;
+	background: #e5e6e7;
+	border: 1px solid #aaa;
+	border-radius: 1px;
+	text-indent: .2em;
+	box-shadow: inset 3px 3px 2px rgba(0,0,0,.3);
+	text-align: left;
+}
+
+/******************************************
+			End of General Styles
+*******************************************/

@@ -1,0 +1,50 @@
+.main-nav {
+	padding: .5em 1em;
+	background:#1f2833;
+	box-shadow: -1px -1px 2px #1f2833,1px 1px 2px #66fcf1;
+	width:70%;
+	
+	}
+
+ul#menu div {
+	
+}
+
+li div {
+	background:#1f2833;
+	color:#c5c6c7;
+	width: ;
+	height: 2.5em;
+	line-height: 2.5px;
+	border:1px solid #1f2833;
+	border-radius:5px;
+	vertical-align: baseline;
+	box-shadow: -1px -1px 2px #1f2833,1px 1px 2px #66fcf1;
+	margin-bottom: .3rem;
+	text-align:left;
+	width:100%;
+}
+
+li > ul {
+	margin-left: 2em;
+	font-size: .9rem;
+	/* background: green; */
+}
+div a {
+	display:inline-block;
+	padding: 1rem 80% 1rem .2rem;
+	background:red;
+	width:100%;
+}
+
+/*Nav*/
+
+h2.sidebar_title {
+	background:#1f2833;
+	padding:.5em;
+	font: .7em;
+}
+
+.sidebar {
+	background:#c5c6c7;
+}	
