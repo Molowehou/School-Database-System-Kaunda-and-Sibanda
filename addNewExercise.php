@@ -8,7 +8,7 @@
     require_once __DIR__ . '/inc/header.php';
    ?>
 
-    <div class="container col-12"> 
+  
     
      <?php 
          require_once __DIR__ . '/inc/nav.php';
@@ -63,7 +63,7 @@
       <th  class="col-xs-2">Student Name</th>
       <th class="col-xs-2">Student Surname</th>
       <th class="col-xs-1">Mark</th>
-      <th class="col-xs-5">Comment</th>
+      <th class="col-xs-3">Comment</th>
     </tr>
   </thead>
   
@@ -72,8 +72,8 @@
           <?php
             $class = request()->get('class');
 
-           foreach (getClassByID($class) as $student) {
-               //include __DIR__ ."/inc/tableStudents.php";
+           foreach (getClassByID() as $student) {
+               include __DIR__ ."/inc/tableStudents.php";
           } ?> 
 
 
@@ -89,8 +89,8 @@
 
 
 
-  </div><!--/container -->
+
 		
-  <!-- <?php 
-     //require_once __DIR__ . '/inc/footer.php';
-  ?>-->
+   <?php 
+     require_once __DIR__ . '/inc/footer.php';
+  ?>

@@ -462,13 +462,13 @@ function getTeacher($StaffID){
 
 
 
-function getClassByID($studentClass_ID){
+function getClassByID(){
     global $db;
 
     try{ 
-        $query = "SELECT * FROM tblStudentDetails WHERE [studentClass_ID]=?";
+        $query = "SELECT * FROM tblStudentDetails";
         $stmt= $db->prepare($query);
-        $stmt->bindparam(1,$studentClass_ID);
+        // $stmt->bindparam(1,$studentClass_ID);
         $stmt->execute(); 
      return $stmt->fetch(PDO::FETCH_ASSOC);
      

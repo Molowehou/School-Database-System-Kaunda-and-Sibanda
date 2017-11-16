@@ -15,7 +15,7 @@
     require_once __DIR__ . '/inc/header.php';
    ?>
 
-   <div class="container col-12">
+ 
     
     <?php
          require_once __DIR__ . '/inc/nav.php';
@@ -32,12 +32,9 @@
 	</main>
 			
 
-   <?php
-     require_once __DIR__ . '/inc/aside.php';
-   ?>
 
 
-  </div><!--/container -->
+
 		
   <?php
      require_once __DIR__ . '/inc/footer.php';

@@ -16,7 +16,7 @@
 
    
 
-   <div class="container col-12">
+   
     
     <?php
          require_once __DIR__ . '/inc/nav.php';
@@ -49,7 +49,7 @@
   </main>
       
 
-  </div><!--/container -->
+
     
   <?php
      require_once __DIR__ . '/inc/footer.php';
