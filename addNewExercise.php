@@ -18,6 +18,13 @@
 		<div class="main-content"> <!--main content-->
 	      <h5 class="section-title">ADD NEW EXERCISE</h5>
 
+<?php 
+  $class = request()->get('class');
+  $subject = request()->get('subject');
+?>
+
+<form class = "form-horizontal" method= "post" action = "procedures/DoAddExercise.php?class=<?php echo $class; ?> & subject=<?php echo $subject;?> ">
+
            <div class="modal-body row">
                 
               <div class="col-sm-6"> <!-- Column 1-->
@@ -54,7 +61,21 @@
              </div>
          </div>
          </div> <!-- End of column 2-->
+
+
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-10">
+               <button type="submit" class="btn" id="btnSave">ADD EXERCISE</button>
+            </div>
+         </div>
+
+
      </div> <!-- End of Section-->
+
+
+
+
+
 
      <table class="table table-striped table-hover ">
   <thead>
@@ -69,18 +90,23 @@
   
   <tbody>
     
-          <?php
-            $class = request()->get('class');
+         
 
-           foreach (getClassByID() as $student) {
-               include __DIR__ ."/inc/tableStudents.php";
-          } ?> 
+        
+            <?php   $class = request()->get('class');
+               $i=0;
+               foreach (getClassByID($class) as $student) {
+                 $numberOfStudents = count($student);
+                  ++$i; 
+                   include __DIR__ ."/inc/tableStudents.php";   
 
-
-
-    
+              } ?>
+       
+ 
   </tbody>
 </table>
+
+      </form>
 
 				
 		</div> <!--/main content-->

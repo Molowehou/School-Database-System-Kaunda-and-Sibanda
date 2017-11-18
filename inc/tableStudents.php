@@ -1,8 +1,5 @@
 
-
-
     <tr>
- 
       <td>
           <?php echo $student['studentID']; ?>
       </td>
@@ -17,21 +14,12 @@
       </td>
 
        <td>
-          <?php ?>
+          <input type="text" class="form-control" id="exerciseMark<?php echo $i  ?>" name="exerciseMark<?php echo $i  ?>">
       </td>
 
        <td>
-          <?php ?>
+        <input type="text" class="form-control" id="exerciseComment<?php echo $i  ?>" name="exerciseComment<?php echo $i  ?>">
       </td>
-      
-             <td>
-          <?php ?>
-      </td>
-     
-    
     </tr>
 
 
-
-  
-        

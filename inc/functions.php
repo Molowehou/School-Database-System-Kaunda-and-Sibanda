@@ -462,15 +462,15 @@ function getTeacher($StaffID){
 
 
 
-function getClassByID(){
+function getClassByID($studentClass_ID){
     global $db;
 
     try{ 
-        $query = "SELECT * FROM tblStudentDetails";
+        $query = "SELECT * FROM tblStudentDetails WHERE studentClass_ID=:studentClass_ID";
         $stmt= $db->prepare($query);
-        // $stmt->bindparam(1,$studentClass_ID);
+        $stmt->bindparam(':studentClass_ID',$studentClass_ID);
         $stmt->execute(); 
-     return $stmt->fetch(PDO::FETCH_ASSOC);
+     return $stmt->fetchAll(PDO::FETCH_ASSOC);
      
     } catch(\Exception $e) {
         throw $e;
@@ -796,6 +796,67 @@ function findStudentByStudentID($studentID) {
     }
 }
 
+
+function getLastExerciseID(){
+    global $db; 
+    try{ 
+
+    $query = "SELECT TOP 1 ExerciseID FROM tblExercises ORDER BY ExerciseID DESC";
+
+        $stmt= $db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch(\Exception $e) {
+        throw $e;
+    }
+}
+
+function generateNewExerciseID(){
+    global $db; 
+    try{ 
+
+    foreach (getLastExerciseID() as $LastExerciseID) {
+        $NewExerciseID=$LastExerciseID+1;
+    }
+        return $NewExerciseID;
+    } catch(\Exception $e) {
+        throw $e;
+    }
+}
+
+
+function addNewExercise($NewExerciseID,$subject_ID,
+              $class_ID,$student_ID,$staff_ID,$Topic,$SubTopic,$Title,$HighestPossibleMark,$exerciseMark1,
+                $exerciseComment1 ) {
+    global $db;
+     
+    try {
+        $query = "INSERT INTO tblExercises (
+       [ExerciseID],[subject_ID],[class_ID],[student_ID],
+       [staff_ID],[Topic],[subTopic],[Title],
+       [HighestPossibleMark],[Mark],[Comment],[ExcerciseDate])
+
+         VALUES   (:NewExerciseID, :subject_ID,:class_ID,
+                  :student_ID,:staff_ID,:Topic,
+                  :SubTopic,:Title,:HighestPossibleMark,
+                  :Mark,:Comment,GETDATE())";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':NewExerciseID', $NewExerciseID);
+        $stmt->bindParam(':subject_ID', $subject_ID);
+        $stmt->bindParam(':class_ID', $class_ID);
+        $stmt->bindParam(':student_ID',$student_ID);
+        $stmt->bindParam(':staff_ID', $staff_ID);
+        $stmt->bindParam(':Topic', $Topic);
+        $stmt->bindParam(':SubTopic', $SubTopic);
+        $stmt->bindParam(':Title', $Title);
+    $stmt->bindParam(':HighestPossibleMark', $HighestPossibleMark);
+        $stmt->bindParam(':Mark', $exerciseMark1);
+        $stmt->bindParam(':Comment', $exerciseComment1);       
+        return $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
 
 
 

@@ -34,9 +34,10 @@
 
                 <?php
                    $class = request()->get('class');
+                   $subject = request()->get('subject');
                 ?> 
 
-               <a  class="btn" id="btnSave" href="addNewExercise.php?class=<?php echo $class; ?>">ADD NEW EXERCISE</a>
+               <a  class="btn" id="btnSave" href="addNewExercise.php?class=<?php echo $class;?>& subject=<?php echo $subject; ?>">ADD NEW EXERCISE</a>
             </div>
          </div>
 
