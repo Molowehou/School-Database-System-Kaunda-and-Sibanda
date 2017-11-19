@@ -19,11 +19,12 @@
 	      <h5 class="section-title">ADD NEW EXERCISE</h5>
 
 <?php 
+  $form = request()->get('form');
   $class = request()->get('class');
   $subject = request()->get('subject');
 ?>
 
-<form class = "form-horizontal" method= "post" action = "procedures/DoAddExercise.php?class=<?php echo $class; ?> & subject=<?php echo $subject;?> ">
+<form class = "form-horizontal" method= "post" action = "procedures/DoAddExercise.php?class=<?php echo $class; ?> & subject=<?php echo $subject;?>& form=<?php echo $form;?> ">
 
            <div class="modal-body row">
                 
@@ -31,21 +32,21 @@
                   <div class="form-group">
                      <label for="Topic" class="col-sm-3 control-label">Topic</label>
                      <div class="col-sm-9">
-                         <input type="text" class="form-control" id="Topic" name="Topic" placeholder="Topic" value="">
+                         <input type="text" class="form-control" id="Topic" name="Topic" required="required" value="">
                      </div>
                 </div>
 
                 <div class="form-group">
                     <label for="SubTopic" class="col-sm-3 control-label">Sub-Topic</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="SubTopic" name="SubTopic" placeholder="Sub-Topic" value="">
+                        <input type="text" class="form-control" id="SubTopic" name="SubTopic" value="" required="required">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="Title" class="col-sm-3 control-label">Title</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="Title" name="Title" placeholder="Title" value="">
+                        <input type="text" class="form-control" id="Title" name="Title" value="" required="required">
                     </div>
                 </div>
 
@@ -57,7 +58,7 @@
          <div class="form-group">
              <label for="HighestPossibleMark" class="col-sm-8 control-label">Highest Possible Mark</label>
              <div class="col-sm-5">
-                 <input type="text" class="form-control" id="HighestPossibleMark" name="HighestPossibleMark" placeholder="Highest Possible Mark" value="">
+                 <input type="text" class="form-control" id="HighestPossibleMark" name="HighestPossibleMark" value=""  required="required">
              </div>
          </div>
          </div> <!-- End of column 2-->
@@ -89,20 +90,20 @@
   </thead>
   
   <tbody>
-    
-         
-
-        
-            <?php   $class = request()->get('class');
+            <?php
+       $form = request()->get('form');
+       $class = request()->get('class');
+       $subject = request()->get('subject'); 
+                echo  $form;
+                echo  $class;
+               
                $i=0;
-               foreach (getClassByID($class) as $student) {
+               foreach (getClassByID($form,$class) as $student) {
+
                  $numberOfStudents = count($student);
                   ++$i; 
                    include __DIR__ ."/inc/tableStudents.php";   
-
               } ?>
-       
- 
   </tbody>
 </table>
 

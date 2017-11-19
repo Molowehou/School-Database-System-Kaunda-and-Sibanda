@@ -9,6 +9,7 @@
 					<li><a href="textbooksDashboard.php">TEXTBOOK DATABASE</a></li>
 					<li><a href="inventoryDashboard.php">INVENTORY</a></li>
 					<li><a href="examsDashboard.php">EXAMS DATABASE</a></li>
-					<li><a href="adminDashboard.php">ADMIN SECTION</a></li>
+					<li><a href="adminDashboard.php">USER REGISTRATION SECTION</a></li>
+					<li><a href="teacherSubjectsDashboard.php">ADMIN SECTION</a></li>
 				</ul>
 			</nav>

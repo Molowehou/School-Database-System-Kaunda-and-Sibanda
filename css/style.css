@@ -51,19 +51,23 @@ margin-right:2px;
 }
 
 #editbtn{
-	width: 70px;
     background-color: blue;
-
+    width: 45%;
+    text-align: center;
+    text-decoration: none;
 }
 
 #deletebtn{
-background-color: #ff0000;
-width: 70px;
-
+  background-color: #ff0000;
+  width: 45%;
+  text-align: center;
+   text-decoration: none;
 }
 
 
-
+li{
+	text-decoration: none;
+}
 
 label,h2{
 	color:#005d61;

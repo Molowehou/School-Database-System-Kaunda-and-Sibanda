@@ -3,15 +3,19 @@
 require_once __DIR__. '/../inc/bootstrap.php';
 requireAuth();
 
-// ExerciseID
+  // ExerciseID
    $NewExerciseID=generateNewExerciseID();
+   
+   //Class
    $class_ID=trim(request()->get('class'));
+   $form_ID=trim(request()->get('form'));
 
 $x=0;
-foreach (getClassByID($class_ID) as $student) {
+foreach (getClassByID($form_ID,$class_ID) as $student) {
 $x++;
 
 // Subject Class StaffID 
+$form_ID=trim(request()->get('form'));
 $subject_ID=trim(request()->get('subject'));
 $class_ID=trim(request()->get('class'));
 $student_ID=$student['studentID'];
@@ -32,23 +36,16 @@ $HighestPossibleMark= trim(request()->get('HighestPossibleMark'));
 
 
 
-echo $NewExerciseID."<br>";
-echo $subject_ID."<br>";
-echo $class_ID."<br>";
-echo $student_ID."<br>";
-echo $staff_ID."<br>";
-echo $Topic."<br>";
-echo $SubTopic."<br>";
-echo $Title."<br>";
-echo $HighestPossibleMark."<br>";
-echo $exerciseMark."<br>";
-echo $exerciseComment."<br>";
+//Error Handlers
+   if(empty($Topic) or empty($SubTopic) or empty($Title) or empty($HighestPossibleMark)){
+  $session->getFlashBag()->add('error', "Could not Save the Exercise.Make sure the Topic, Sub Topic, Title and Highest Possible Mark are entered.");
 
+    redirect('exerciseByID.php?class='.$class_ID.'& subject='.$subject_ID.'& form='.$form_ID);
+    exit;
+}
 
 try{
- $NewExercise = addNewExercise($NewExerciseID,$subject_ID,
-              $class_ID,$student_ID,$staff_ID,$Topic,$SubTopic,$Title,$HighestPossibleMark,$exerciseMark,
-                $exerciseComment);
+ $NewExercise = addNewExercise($NewExerciseID,$subject_ID,$form_ID,$class_ID,$student_ID,$staff_ID,$Topic,$SubTopic,$Title,$HighestPossibleMark,$exerciseMark,$exerciseComment);
 
      }
 catch(\exception $e){
@@ -58,4 +55,4 @@ catch(\exception $e){
 
 }
 
-   redirect('exerciseByID.php?class='.$class_ID.'& subject='.$subject_ID);
+   redirect('exerciseByID.php?class='.$class_ID.'& subject='.$subject_ID.'& form='.$form_ID);

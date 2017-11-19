@@ -3,8 +3,8 @@
 
     <tr>
       <td>
-          <a class="btn" id="editbtn" href="/MuzindaSchoolDatabase3/editStudent.php?studentID=<?php echo $student['studentID']; ?>">EDIT</a>
-          <a class="btn" id="deletebtn"  href="/MuzindaSchoolDatabase3/editStudent.php?studentID=<?php echo $student['studentID']; ?>">DELETE</a>
+          <a class="bt btn-sm btn-success"  id="editbtn" href="/MuzindaSchoolDatabase3/editStudent.php?studentID=<?php echo $student['studentID']; ?>">EDIT</a>
+          <a class="bt btn-sm btn-warning" id="deletebtn"  href="/MuzindaSchoolDatabase3/editStudent.php?studentID=<?php echo $student['studentID']; ?>">DELETE</a>
           
          
                    

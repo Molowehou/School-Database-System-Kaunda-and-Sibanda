@@ -55,11 +55,11 @@
                 <thead>
                  <tr>
                    <th></th>
-                   <th >Staff ID</th>
-                   <th>First Name</th>
-                   <th>Last Name</th>
-                   <th>Registered</th>
-                   <th>Promote/Demote</th>
+                   <th class="col-xs-2">Staff ID</th>
+                   <th class="col-xs-2">First Name</th>
+                   <th class="col-xs-2">Last Name</th>
+                   <th class="col-xs-2">Registered</th>
+                   <th class="col-xs-2">Promote/Demote</th>
                  </tr>
                 </thead>
                 <tbody>
@@ -67,7 +67,7 @@
                     <tr>
                        <td>
                           <?php if(!isOwner($user['id'])):?>
-                          <span><a class="btn btn-sm" id="deletebtn" href="/MuzindaSchoolDatabase3/editTeacher.php?staffID=<?php echo $user['employeeStaffID']; ?>">DELETE</a></span>
+                          <span><a class="bt btn-sm btn-warning" id="deletebtn" href="/MuzindaSchoolDatabase3/editTeacher.php?staffID=<?php echo $user['employeeStaffID']; ?>">DELETE</a></span>
                           <?php endif; ?>
                        </td>
                        <td><?php echo $user['employeeStaffID'];?></td>

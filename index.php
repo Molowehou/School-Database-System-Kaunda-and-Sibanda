@@ -29,7 +29,7 @@
 
                     foreach (getAllTeacherSubjects($user) as $user):?>
 
-                      <a href="exerciseByID.php?class=<?php echo $user['Class_ID'];?> & subject=<?php echo $user['Subject_ID'];?>" class="list-group-item"><strong><?php echo $user['Form'];?></strong>: <?php echo $user['SubjectName'];?></a>
+                      <a href="exerciseByID.php?class=<?php echo $user['Class_ID'];?> & subject=<?php echo $user['Subject_ID'];?> & form=<?php echo $user['Form_ID'];?>" class="list-group-item"><strong><?php echo $user['Form'];echo $user['Class'] ?></strong>: <?php echo $user['SubjectName'];?></a>
 
                     <?php endforeach; ?>
                        

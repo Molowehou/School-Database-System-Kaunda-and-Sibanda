@@ -9,9 +9,6 @@
    ?>
 
 
-   
-
- 
     
     <?php
          require_once __DIR__ . '/inc/nav.php';
@@ -33,11 +30,13 @@
                <div class="col-sm-offset-3 col-sm-10">
 
                 <?php
+                   $form = request()->get('form');
                    $class = request()->get('class');
                    $subject = request()->get('subject');
+
                 ?> 
 
-               <a  class="btn" id="btnSave" href="addNewExercise.php?class=<?php echo $class;?>& subject=<?php echo $subject; ?>">ADD NEW EXERCISE</a>
+               <a  class="btn" id="btnSave" href="addNewExercise.php?class=<?php echo $class;?> & subject=<?php echo $subject;?> & form=<?php echo $form; ?>">ADD NEW EXERCISE</a>
             </div>
          </div>
 
@@ -55,7 +54,7 @@
 
  </div><!-- End of column which enables the creation of two columns-->
 
-
+<?php echo display_errors(); ?>
 
 
 <table class="table table-striped table-hover ">
@@ -72,11 +71,12 @@
   <tbody>
            
           <?php
-
+          $form = request()->get('form');
           $class = request()->get('class');
           $subject= request()->get('subject');
 
-          foreach (getExerciseByID($class,$subject)  as $exercise) {
+
+          foreach (getExerciseByID($form,$class,$subject)  as $exercise) {
                include __DIR__ ."/inc/tableMarksForm.php";
           } ?> 
 

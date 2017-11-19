@@ -202,17 +202,17 @@ function addStudent (
 
 
 
-function addTeacherSubject($StaffID,$subjectID,$classID) {
+function addTeacherSubject($StaffID,$SubjectID,$FormID,$ClassID) {
     global $db;
     
     try {
-        $query = "INSERT INTO tblTeachers_Subjects(Teacher_ID, Subject_ID,Class_ID)
-             VALUES (:StaffID,:TeacherID,:ClassID)";
+        $query = "INSERT INTO tblTeachers_Subjects(Staff_ID, Subject_ID,Form_ID,Class_ID)
+             VALUES (:StaffID,:SubjectID,:FormID,:ClassID)";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':StaffID',$StaffID);
-        $stmt->bindParam(':TeacherID',$subjectID);
-        $stmt->bindParam(':ClassID', $classID);
-
+        $stmt->bindParam(':SubjectID',$SubjectID);
+        $stmt->bindParam(':FormID', $FormID);
+        $stmt->bindParam(':ClassID', $ClassID);
         return $stmt->execute();
     } catch (\Exception $e) {
         throw $e;
@@ -273,6 +273,40 @@ function getAllTeachers(){
         throw $e;
     }
 }
+
+
+
+function getAllSubjects(){
+    global $db; 
+    try{ 
+        
+    $query = "SELECT *
+    FROM  tblSubjects  ORDER BY SubjectName ASC";
+
+        $stmt= $db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    } catch(\Exception $e) {
+        throw $e;
+    }
+}
+
+
+function getAllClasses(){
+    global $db; 
+    try{ 
+        
+    $query = "SELECT *
+    FROM  tblClass  ORDER BY Class ASC";
+
+        $stmt= $db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    } catch(\Exception $e) {
+        throw $e;
+    }
+}
+
 
 
 
@@ -462,13 +496,17 @@ function getTeacher($StaffID){
 
 
 
-function getClassByID($studentClass_ID){
+function getClassByID($form_ID,$class_ID){
     global $db;
 
     try{ 
-        $query = "SELECT * FROM tblStudentDetails WHERE studentClass_ID=:studentClass_ID";
+        $query = "SELECT * 
+              FROM tblStudentDetails
+              WHERE studentForm_ID = :form_ID
+              AND studentClass_ID=:class_ID";
         $stmt= $db->prepare($query);
-        $stmt->bindparam(':studentClass_ID',$studentClass_ID);
+         $stmt->bindparam(':form_ID',$form_ID);
+         $stmt->bindparam(':class_ID',$class_ID);
         $stmt->execute(); 
      return $stmt->fetchAll(PDO::FETCH_ASSOC);
      
@@ -653,16 +691,23 @@ function getAllTeacherSubjects($user) {
     try {
         $query = "SELECT  [employeeStaffID],[employeeFirstName],
                  [employeeLastName],[Form_ID],[Subject_ID],[Class_ID],
-                 [SubjectName],[Form]
+                 [SubjectName],[Form],[Class]
                  FROM tblTeacherDetails
+                 
                  INNER JOIN tblTeachers_Subjects 
                  ON tblTeacherDetails.[employeeStaffID]=tblTeachers_Subjects.[Staff_ID]
+                 
                  INNER JOIN tblSubjects 
                  ON tblTeachers_Subjects .[Subject_ID]=tblSubjects.[SubjectID]
                  
                  INNER JOIN tblForm
                  ON tblTeachers_Subjects .[Form_ID]=tblForm.[ID]
+
+                 INNER JOIN tblClass
+                 ON tblTeachers_Subjects .[Class_ID]=tblClass.[ID]
+
                  WHERE tblTeachers_Subjects.[Staff_ID]=:user
+                
                  ORDER BY [Form] ASC";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':user',$user);
@@ -673,6 +718,40 @@ function getAllTeacherSubjects($user) {
         throw $e;
     }
 }
+
+
+function getAllTeachersBySubjects() {
+    global $db;
+    
+    try {
+        $query = "SELECT  [employeeStaffID],[employeeFirstName],
+                 [employeeLastName],[Form_ID],[Subject_ID],[Class_ID],
+                 [SubjectName],[Form],[Class]
+                 FROM tblTeacherDetails
+                 INNER JOIN tblTeachers_Subjects 
+                 ON tblTeacherDetails.[employeeStaffID]=tblTeachers_Subjects.[Staff_ID]
+                 INNER JOIN tblSubjects 
+                 ON tblTeachers_Subjects .[Subject_ID]=tblSubjects.[SubjectID]
+
+                 INNER JOIN tblForm
+                 ON tblTeachers_Subjects .[Form_ID]=tblForm.[ID]
+
+                 INNER JOIN tblClass
+                 ON tblTeachers_Subjects .[Class_ID]=tblClass.[ID]
+
+                 ORDER BY [Form] ASC";
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
+
 
 
 function getExercisesBySubject($Subject_ID,$class_ID) {
@@ -700,7 +779,7 @@ function getExercisesBySubject($Subject_ID,$class_ID) {
 }
 
 
-function getExerciseByID($class,$subject) {
+function getExerciseByID($form,$class,$subject) {
     global $db;
     
     try {
@@ -709,9 +788,11 @@ function getExerciseByID($class,$subject) {
        FROM tblExercises
        WHERE tblExercises.[class_ID]=:class
        AND tblExercises.[subject_ID]=:subject
+       AND tblExercises.[form_ID]=:form
        ORDER BY ExerciseID,Topic,[subTopic],[Title],[ExcerciseDate];"; 
 
         $stmt = $db->prepare($query);
+        $stmt->bindParam(':form',$form);
         $stmt->bindParam(':class',$class);
         $stmt->bindParam(':subject',$subject);
         $stmt->execute();
@@ -796,6 +877,22 @@ function findStudentByStudentID($studentID) {
     }
 }
 
+function findExerciseByID($NewExerciseID) {
+    global $db;
+    
+    try {
+        $query = "SELECT * FROM tblExercises WHERE ExerciseID =:ExerciseID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':ExerciseID', $NewExerciseID);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+        
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
 
 function getLastExerciseID(){
     global $db; 
@@ -824,34 +921,47 @@ function generateNewExerciseID(){
     }
 }
 
+function findLastExerciseID(){
+    global $db; 
+    try{ 
 
-function addNewExercise($NewExerciseID,$subject_ID,
-              $class_ID,$student_ID,$staff_ID,$Topic,$SubTopic,$Title,$HighestPossibleMark,$exerciseMark1,
-                $exerciseComment1 ) {
-    global $db;
-     
+    foreach (getLastExerciseID() as $LastExerciseID) {
+        $LastExerciseID=$LastExerciseID;
+    }
+        return $LastExerciseID;
+    } catch(\Exception $e) {
+        throw $e;
+    }
+}
+
+
+function addNewExercise($NewExerciseID,$subject_ID,$form_ID,$class_ID,$student_ID,$staff_ID,$Topic,$SubTopic,$Title,$HighestPossibleMark,$exerciseMark,$exerciseComment) {
+
+    global $db; 
     try {
         $query = "INSERT INTO tblExercises (
-       [ExerciseID],[subject_ID],[class_ID],[student_ID],
+       [ExerciseID],[subject_ID],[form_ID],
+       [class_ID],[student_ID],
        [staff_ID],[Topic],[subTopic],[Title],
        [HighestPossibleMark],[Mark],[Comment],[ExcerciseDate])
 
-         VALUES   (:NewExerciseID, :subject_ID,:class_ID,
-                  :student_ID,:staff_ID,:Topic,
-                  :SubTopic,:Title,:HighestPossibleMark,
-                  :Mark,:Comment,GETDATE())";
-        $stmt = $db->prepare($query);
-        $stmt->bindParam(':NewExerciseID', $NewExerciseID);
-        $stmt->bindParam(':subject_ID', $subject_ID);
-        $stmt->bindParam(':class_ID', $class_ID);
-        $stmt->bindParam(':student_ID',$student_ID);
-        $stmt->bindParam(':staff_ID', $staff_ID);
-        $stmt->bindParam(':Topic', $Topic);
-        $stmt->bindParam(':SubTopic', $SubTopic);
-        $stmt->bindParam(':Title', $Title);
-    $stmt->bindParam(':HighestPossibleMark', $HighestPossibleMark);
-        $stmt->bindParam(':Mark', $exerciseMark1);
-        $stmt->bindParam(':Comment', $exerciseComment1);       
+         VALUES   (:NewExerciseID,:subject_ID,:form_ID,:class_ID,
+            :student_ID,:staff_ID,:Topic,:SubTopic,
+            :Title,:HighestPossibleMark,:Mark,
+            :Comment,GETDATE())";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':NewExerciseID', $NewExerciseID);
+    $stmt->bindParam(':subject_ID', $subject_ID);
+    $stmt->bindParam(':form_ID', $form_ID);
+    $stmt->bindParam(':class_ID', $class_ID);
+    $stmt->bindParam(':student_ID',$student_ID);
+    $stmt->bindParam(':staff_ID', $staff_ID);
+    $stmt->bindParam(':Topic', $Topic);
+    $stmt->bindParam(':SubTopic', $SubTopic);
+    $stmt->bindParam(':Title', $Title);
+    $stmt->bindParam(':HighestPossibleMark',$HighestPossibleMark);
+    $stmt->bindParam(':Mark', $exerciseMark);
+    $stmt->bindParam(':Comment', $exerciseComment);       
         return $stmt->execute();
     } catch (\Exception $e) {
         throw $e;

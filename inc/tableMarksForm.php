@@ -3,8 +3,8 @@
       <tr>
       <td>
          <p>
-          <span><a class="btn" href="exerciseDashboard.php?ExerciseID=<?php echo $exercise['ExerciseID']; ?>">View</a></span>
-            <span><a class="btn" href="">Delete</a></span>
+          <span><a class="bt btn-sm btn-success"  id="editbtn" href="exerciseDashboard.php?ExerciseID=<?php echo $exercise['ExerciseID']; ?>">View</a></span>
+            <span><a class="bt btn-sm btn-warning" id="deletebtn" href="">Delete</a></span>
          </p>
       </td>
 
