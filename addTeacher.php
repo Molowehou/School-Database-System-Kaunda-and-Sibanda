@@ -18,6 +18,7 @@
 	<main>
 		<div class="main-content"> <!--main content-->
         <h5 class="section-title">TEACHER REGISTRATION</h5>
+          <?php echo display_errors(); ?>
 
         <form class = "form-horizontal" method= "post" action = "procedures/addTeacher.php">
             <?php include __DIR__ ."/inc/teacherForm.php"; ?>

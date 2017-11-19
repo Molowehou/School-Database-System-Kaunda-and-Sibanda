@@ -23,7 +23,7 @@
         <form class="form-signin" method="post" action="/MuzindaSchoolDatabase3/procedures/changePassword.php">
             <h4 class="form-signin-heading">My Account</h4>
             <h5 class="form-signin-heading">Change Password</h5>
-            <?php echo display_errors(); ?>
+            
             <!-- <?php //echo display_success(); ?> -->
             <label for="inputCurrentPassword" class="sr-only">Current Password</label>
             <input type="password" id="inputCurrentPassword" name="current_password" class="form-control" placeholder="Current Password" required autofocus>

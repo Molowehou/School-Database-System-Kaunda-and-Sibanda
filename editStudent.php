@@ -70,6 +70,7 @@ $buttonText = 'Save Changes';
 	<main>
 		<div class="main-content"> <!--main content-->
 			<h5 class="section-title">Update Student Details</h5>
+        <?php echo display_errors(); ?>
          
           <form class = "form-horizontal" method= "post" action = "procedures/editStudent.php">
           	   <input type="hidden" name="studentID" value="<?php echo $student['studentID'];?>"/>

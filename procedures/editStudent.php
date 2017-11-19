@@ -46,7 +46,7 @@ try{
     redirect('studentDashboard.php');
 }
 catch(\exception $e){
-	 $session->getFlashBag()->add('error','An error occured and the book could not be updated');
+	 $session->getFlashBag()->add('error','An error occured and student information could not be updated');
      redirect('editStudent.php?StudentID='.$studentID);
 }
 

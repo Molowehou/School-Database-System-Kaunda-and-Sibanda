@@ -18,6 +18,8 @@
 		<div class="main-content"> <!--main content-->
 	      <h5 class="section-title">ADD NEW EXERCISE</h5>
 
+          <?php echo display_errors(); ?>
+
 <?php 
   $form = request()->get('form');
   $class = request()->get('class');

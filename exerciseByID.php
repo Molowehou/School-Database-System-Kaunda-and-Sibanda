@@ -17,6 +17,7 @@
 	<main>
 		<div class="main-content"> <!--main content-->
          <h5 class="section-title">EXERCISES LIST</h5>
+           <?php echo display_errors(); ?>
 
 
          <!-- ADD NEW TEACHER -->

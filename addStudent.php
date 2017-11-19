@@ -19,6 +19,8 @@
 		<div class="main-content"> <!--main content-->
         <h5 class="section-title">STUDENT REGISTRATION</h5>
 
+          <?php echo display_errors(); ?>
+
         <form class = "form-horizontal" method= "post" action = "procedures/addStudent.php">
             <?php include __DIR__ ."/inc/StudentForm.php"; ?>
         </form>

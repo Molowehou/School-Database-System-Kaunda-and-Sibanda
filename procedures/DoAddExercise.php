@@ -49,7 +49,7 @@ try{
 
      }
 catch(\exception $e){
-   $session->getFlashBag()->add('error', 'Error ocurred and some of the marks could not be added');
+   $session->getFlashBag()->add('error', 'Error ocurred and  the marks could not be added');
    redirect('index.php');
     }
 

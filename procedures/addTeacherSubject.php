@@ -11,10 +11,10 @@ $ClassID= request()->get('Class');
 
 try{
  $newTeacherSubject = addTeacherSubject($StaffID,$SubjectID,$FormID,$ClassID);
-    $session->getFlashBag()->add('success', 'Teacher has been Successfully added');
+    $session->getFlashBag()->add('success', 'Teacher has been su Successfully added');
     redirect('teacherSubjectsDashboard.php');
 }
 catch(\exception $e){
-   $session->getFlashBag()->add('error', 'Error ocurred and Teacher could not be added');
-   redirect('add.php');
+   $session->getFlashBag()->add('error', 'Teacher could not be assigned to the class, please ensure that no other Teacher has already been assigned to the class.');
+   redirect('teacherSubjectsDashboard.php');
 }

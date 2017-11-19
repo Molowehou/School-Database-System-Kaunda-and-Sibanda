@@ -24,6 +24,7 @@
 	<main>
 		<div class="main-content"> <!--main content-->
 	      <h5 class="section-title">INVENTORY DATABASE</h5>
+          <?php echo display_errors(); ?>
              
 
 

@@ -61,6 +61,7 @@ $buttonText = 'Save Changes';
 	<main>
 		<div class="main-content"> <!--main content-->
 	      <h5 class="section-title">TEACHER REGISTRATION</h5>
+          <?php echo display_errors(); ?>
 
           <form class = "form-horizontal" method= "post" action = "procedures/editTeacher.php">
           	   <input type="hidden" name="staffID" value="<?php echo $teacher['employeeStaffID'];?>"/>

@@ -16,6 +16,7 @@
   <main>
     <div class="main-content"> <!--main content-->
      <h5 class="section-title">Teacher Subjects Dashboard</h5>
+       <?php echo display_errors(); ?>
 
 
   <div class="modal-body row"> <!-- Start of column which enables the creation of two columns-->

@@ -24,6 +24,7 @@
 	<main>
 		<div class="main-content"> <!--main content-->
 	      <h5 class="section-title">ADMIN SECTION</h5>
+          <?php echo display_errors(); ?>
 
                     <!-- Button to trigger modal -->
                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Register New User

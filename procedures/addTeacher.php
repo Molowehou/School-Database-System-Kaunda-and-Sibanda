@@ -61,7 +61,7 @@ echo $Email1."<br>";
 */
 
 if(empty($firstName)){
-	$session->getFlashBag()->add('error', "Transaction cancelled.Please enter Teacher first name next time.");
+	$session->getFlashBag()->add('error', "Error occured and Staff Member could not be saved.Please ensure you complete All The required fields such as Name and Surname");
 	redirect('staffDashboard.php');
     exit;
 }
@@ -91,6 +91,6 @@ try{
     
 }
 catch(\exception $e){
-   $session->getFlashBag()->add('error', 'Error ocurred and Teacher could not be added');
+   $session->getFlashBag()->add('error', 'Error ocurred and Staff Member could not be  to the Database. Please try again or Contact The Administrator if the error persists');
    redirect('staffDashboard.php');
 }

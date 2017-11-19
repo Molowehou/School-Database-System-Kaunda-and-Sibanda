@@ -19,7 +19,7 @@ if($new_password != $confirm_password){
 $user = findUserByAccessToken();
 
 if(empty($user)){
-	$session->getFlashBag()->add('error', 'An error occured, Try Again. If it persists contact admin'); 
+	$session->getFlashBag()->add('error', 'An error occured, Try Again. If it persists contact The Administrator'); 
 	redirect('account.php');
 }
 

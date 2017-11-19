@@ -25,6 +25,8 @@
   <main>
     <div class="main-content"> <!--main content-->
          <h5 class="section-title">EXERCISE MARKS</h5>
+
+           <?php echo display_errors(); ?>
              <table class="table table-striped table-hover ">
                 <thead>
                    <tr>

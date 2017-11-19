@@ -29,7 +29,8 @@ require_once __DIR__ . '/inc/nav.php';
  </div> <!--/Modal-dialog -->
 </div><!--/Modal -->
 
-
+  <?php echo display_errors(); ?>
+  
 <table class="table table-striped table-hover ">
   <thead>
     <tr>
