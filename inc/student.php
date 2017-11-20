@@ -13,7 +13,7 @@
        <td><?php echo $student['studentFirstName']; ?></td>
        <td><?php echo $student['studentMiddleName']; ?></td>
        <td><?php echo $student['studentLastName']; ?></td>
-       <td><?php echo $student['studentForm_ID']; ?></td> 
-       <td><?php echo $student['studentClass_ID']; ?></td>
+       <td><?php echo $student['Form']; ?></td> 
+       <td><?php echo $student['Class']; ?></td>
     </tr>
         

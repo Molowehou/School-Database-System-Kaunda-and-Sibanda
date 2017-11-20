@@ -234,7 +234,7 @@ function getAllExercises(){
         
     $query = "SELECT  *,[studentID] ,[studentFirstName],[studentLastName] FROM  tblExercises 
              LEFT OUTER JOIN tblStudentDetails
-             ON tblExercises .[student_ID]=tblStudentDetails.studentID";
+             ON tblExercises .[student_ID]=tblStudentDetails.[studentID]";
 
         $stmt= $db->prepare($query);
         $stmt->execute();
@@ -251,9 +251,13 @@ function getAllStudents(){
     global $db; 
     try{ 
         
-    $query = "SELECT *
+    $query = "SELECT *,Class,Form
              FROM  tblStudentDetails
-             WHERE Status=1 
+             LEFT OUTER JOIN tblForm
+             ON tblStudentDetails .[studentForm_ID]=tblForm.[ID]
+             LEFT OUTER JOIN tblClass
+             ON tblStudentDetails .[studentClass_ID]=tblClass.[ID] 
+             WHERE Status=1             
              ORDER BY [studentForm_ID],[studentClass_ID] ASC";
 
         $stmt= $db->prepare($query);
@@ -542,6 +546,27 @@ function getClassByID($form_ID,$class_ID){
 
 
 
+function getStudentExerciseByID($form_ID,$class_ID,$ExerciseID){
+    global $db;
+
+    try{ 
+        $query = "SELECT * 
+              FROM tblExercises
+              WHERE studentForm_ID = :form_ID
+              AND studentClass_ID=:class_ID
+             AND ExerciseID=:ExerciseID";
+        $stmt= $db->prepare($query);
+         $stmt->bindparam(':form_ID',$form_ID);
+         $stmt->bindparam(':class_ID',$class_ID);
+         $stmt->bindparam(':ExerciseID',$ExerciseID);
+        $stmt->execute(); 
+     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+     
+    } catch(\Exception $e) {
+        throw $e;
+    }
+}
+
 
 
 
@@ -597,10 +622,10 @@ function getAllBooks(){
     global $db; 
     try{ 
         //$query = "SELECT * FROM tblbooks";
-    $query = "SELECT tblBooks.*, sum(tblvotes.value) as score
+    $query = "SELECT tblBooks.*, sum(tblvotes.[value]) as score
     FROM tblbooks
-    Left JOIN tblVotes ON (tblbooks.id = tblVotes.book_id)
-    GROUP BY tblBooks.id,tblBooks.Name,tblBooks.BookDescription,tblBooks.owner_ID,tblBooks.created_at
+    Left JOIN tblVotes ON (tblbooks.[id] = tblVotes.[book_id])
+    GROUP BY tblBooks.[id],tblBooks.[Name],tblBooks.[BookDescription],tblBooks.[owner_ID],tblBooks.[created_at]
     ORDER BY score DESC";
 
         $stmt= $db->prepare($query);
@@ -697,10 +722,11 @@ function getAllUsers() {
     global $db;
     
     try {
-        $query = "SELECT  [employeeStaffID],[employeeFirstName],[employeeLastName],created_at,[role_ID],tblUsers.id
+    $query = "SELECT  [employeeStaffID],[employeeFirstName],[employeeLastName],created_at,[role_ID],tblUsers.[id]
                  FROM tblTeacherDetails
                  INNER JOIN tblUsers 
-                 ON tblTeacherDetails.[employeeStaffID]=tblUsers.StaffID";
+                 ON tblTeacherDetails.[employeeStaffID]=tblUsers.[StaffID]
+                 WHERE tblTeacherDetails.[Status]=1";
         $stmt = $db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -709,6 +735,27 @@ function getAllUsers() {
         throw $e;
     }
 }
+
+
+
+
+function deleteTeacherClass($ExerciseID){
+    global $db;
+    try {
+        $query = "DELETE FROM tblTeachers_Subjects WHERE ID=:ExerciseID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':ExerciseID', $ExerciseID);
+        return $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
+
+
+
 
 function getAllTeacherSubjects($user) {
     global $db;
@@ -733,7 +780,7 @@ function getAllTeacherSubjects($user) {
 
                  WHERE tblTeachers_Subjects.[Staff_ID]=:user
                 
-                 ORDER BY [employeeStaffID] ASC";
+                 ORDER BY [Form] ASC";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':user',$user);
         $stmt->execute();
@@ -749,7 +796,7 @@ function getAllTeachersBySubjects() {
     global $db;
     
     try {
-        $query = "SELECT  [employeeStaffID],[employeeFirstName],
+        $query = "SELECT tblTeachers_Subjects.[ID], [employeeStaffID],[employeeFirstName],
                  [employeeLastName],[Form_ID],[Subject_ID],[Class_ID],
                  [SubjectName],[Form],[Class]
                  FROM tblTeacherDetails
@@ -764,7 +811,7 @@ function getAllTeachersBySubjects() {
                  INNER JOIN tblClass
                  ON tblTeachers_Subjects .[Class_ID]=tblClass.[ID]
 
-                 ORDER BY [Form] ASC";
+                 ORDER BY [employeeStaffID] ASC";
         $stmt = $db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -836,7 +883,7 @@ function getExerciseByExerciseID($ExerciseID) {
     try {
         $query = "SELECT *,[studentID],[studentFirstName],[studentLastName]
                   FROM tblExercises
-                  INNER JOIN tblStudentDetails 
+                  RIGHT JOIN tblStudentDetails 
                   ON tblExercises.[student_ID]=tblStudentDetails.[studentID]
                   WHERE tblExercises.[ExerciseID]=:ExerciseID;"; 
         $stmt = $db->prepare($query);
@@ -861,7 +908,13 @@ function findUserByStaffID($StaffID) {
     global $db;
     
     try {
-        $query = "SELECT * FROM tblusers WHERE StaffID = :StaffID";
+        $query = "SELECT * 
+         FROM tblusers
+         INNER JOIN tblTeacherDetails
+         ON tblusers.[StaffID]=tblTeacherDetails.[employeeStaffID]
+         WHERE StaffID = :StaffID
+         ";
+
         $stmt = $db->prepare($query);
         $stmt->bindParam(':StaffID', $StaffID);
         $stmt->execute();
@@ -1255,6 +1308,40 @@ function ReactivateStudent($studentID) {
         $stmt = $db->prepare($query);
         $stmt->bindParam(':studentID', $studentID);  
          $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
+function updateExercise($student_ID,$ExerciseID,$Topic,
+        $SubTopic,$Title,$HighestPossibleMark,$exerciseMark,
+        $exerciseComment,$StudentExerciseID) {
+
+    global $db;
+    try {
+        $query = "UPDATE tblExercises
+              SET Topic=:Topic, 
+                  subTopic=:SubTopic,
+                  Title=:Title,
+                  HighestPossibleMark=:HighestPossibleMark,
+                  Mark=:exerciseMark,
+                  Comment=:exerciseComment
+              WHERE ID=:StudentExerciseID";
+
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':Topic', $Topic);
+        $stmt->bindParam(':SubTopic', $SubTopic);
+        $stmt->bindParam(':Title', $Title);
+$stmt->bindParam(':HighestPossibleMark', $HighestPossibleMark);
+        $stmt->bindParam(':exerciseMark', $exerciseMark);
+        $stmt->bindParam(':exerciseComment',$exerciseComment);
+       $stmt->bindParam(':ExerciseID',$ExerciseID);
+       $stmt->bindParam(':student_ID',$student_ID);
+    $stmt->bindParam(':StudentExerciseID',$StudentExerciseID);
+
+        return $stmt->execute();
     } catch (\Exception $e) {
         throw $e;
     }

@@ -13,6 +13,13 @@ if(empty($user)){
 }
 
 
+if($user['Status']==2){ 
+  $session->getFlashBag()->add('error','User was found but the user has been deleted from the system. Please contact the Admin');
+     redirect('login.php');
+     exit;
+}
+
+
 if(!password_verify(request()->get('password'),$user['passwords'])) {	
      $session->getFlashBag()->add('error','Invalid Password');   
      redirect('login.php');
