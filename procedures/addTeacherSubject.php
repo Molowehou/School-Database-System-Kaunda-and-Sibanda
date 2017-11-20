@@ -9,9 +9,17 @@ $FormID= request()->get('Form');
 $ClassID= request()->get('Class');
 
 
+$TeacherID = getTeacher($StaffID);
+$TeacherName=$TeacherID['employeeFirstName'];
+$TeacherLastName=$TeacherID['employeeLastName'];
+
+
+ $subject=getSubjectByID($SubjectID);
+  $subjectName=$subject['subjectName'];
+
 try{
  $newTeacherSubject = addTeacherSubject($StaffID,$SubjectID,$FormID,$ClassID);
-    $session->getFlashBag()->add('success', 'Teacher has been su Successfully added');
+    $session->getFlashBag()->add('success', $TeacherName .' '.$TeacherLastName.' has been succesfully asigned to the subject');
     redirect('teacherSubjectsDashboard.php');
 }
 catch(\exception $e){

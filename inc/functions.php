@@ -12,7 +12,7 @@ function request() {
 require_once __DIR__. '/bootstrap.php';
 
 
-//======================Autogenerator for Student ID and Staff ID ===================================
+//======================Autogenerator for Student ID and Staff ID =================================
 
 
 function getLastStaffID(){
@@ -84,9 +84,8 @@ function addTeacher($StaffID,$firstName,$middleName,$lastName,$Gender,
          $EmployerName1,$BusinessPhone1,$CellPhone1,$Email1){
     
     global $db;
-
     $role_ID=2;
-   
+    $Status=1;
     
     try {
         $query = "INSERT INTO tblTeacherDetails(
@@ -96,13 +95,14 @@ function addTeacher($StaffID,$firstName,$middleName,$lastName,$Gender,
          [employeeCellphone],[employeeTelephone],[employeeEmail],[employeeHomeAddress],
          [employeeShortDescription],[nokTitle_ID],[nokFirstName],[nokMiddleName],
          [nokLastName],[nokNationalID],[nokRelationshipToTeacher],[nokHomeAddress],
-         [nokOccupation],[nokEmployerName],[nokBusinessPhone],[nokCellphone],[nokEmail],[EmployeeRole_ID])
+         [nokOccupation],[nokEmployerName],[nokBusinessPhone],[nokCellphone],[nokEmail],[EmployeeRole_ID],[Status])
 
        VALUES (:StaffID,:firstName,:middleName,:lastName,:Gender,:DateOfBirth,
                :NationalID,:EducationalQualifications,:formerSchool,:CellPhone,:Telephone,
                :Email,:HomeAddress,:ShortDescription,:Title,:firstName1,:middleName1,:lastName1,
                 :NationalID1,:RelationshipToTeacher1,:HomeAddress1,:Occupation1,:EmployerName1,
-                :BusinessPhone1,:CellPhone1,:Email1,:role_ID)";
+                :BusinessPhone1,:CellPhone1,:Email1,:role_ID,
+                :Status)";
 
         $stmt = $db->prepare($query);
         $stmt->bindParam(':StaffID',$StaffID);
@@ -132,6 +132,7 @@ function addTeacher($StaffID,$firstName,$middleName,$lastName,$Gender,
         $stmt->bindParam(':CellPhone1',$CellPhone1);
         $stmt->bindParam(':Email1',$Email1);
         $stmt->bindParam(':role_ID', $role_ID);
+        $stmt->bindParam(':Status', $Status);
         return $stmt->execute();
     } catch (\Exception $e) {
         throw $e;
@@ -147,6 +148,7 @@ function addStudent (
     
     global $db;
     $role_ID=3;
+    $Status=1;
     
     try {
         $query = "INSERT INTO tblStudentDetails(
@@ -155,7 +157,7 @@ function addStudent (
                         [studentNationalID],[studentFormerSchool],[studentSpecialNeed],[studentHomeAddress],
                         [studentClass_ID],[studentForm_ID],[gdTitle_ID],[gdFirstName],[gdMiddleName],[gdLastName],
                         [gdNationalID],[gdRelationshipToStudent],[gdHomeAddress],[gdOccupation],[gdEmployerName],
-                        [gdBusinessPhone],[gdCellphone],[gdTelePhone],[gdEmail],[StudentRole_ID])
+                        [gdBusinessPhone],[gdCellphone],[gdTelePhone],[gdEmail],[StudentRole_ID],[Status])
 
              VALUES (
                 :studentID,:firstName,:middleName,
@@ -163,7 +165,7 @@ function addStudent (
                 :NationalID,:formerSchool,:specialNeed,:homeAddress,
                 :class,:form,:guardianTitle,:guardianFirstName,:guardianMiddleName,:guardianlastName,
                 :guardianNationalID,:guardianRelationshipToStudent,:guardianHomeAddress,:guardianOccupation,:guardianEmployerName,
-                :guardianBusinessPhone,:guardianCellPhone,:guardianTelephone,:guardianEmail,:role_ID)";
+                :guardianBusinessPhone,:guardianCellPhone,:guardianTelephone,:guardianEmail,:role_ID,:Status)";
 
         $stmt = $db->prepare($query);
         $stmt->bindParam(':studentID',trim($studentID));
@@ -193,6 +195,8 @@ function addStudent (
         $stmt->bindParam(':guardianTelephone',$guardianTelephone);
         $stmt->bindParam(':guardianEmail', $guardianEmail);
         $stmt->bindParam(':role_ID', $role_ID);
+        $stmt->bindParam(':Status', $Status);
+        
         return $stmt->execute();
     } catch (\Exception $e) {
         throw $e;
@@ -248,7 +252,9 @@ function getAllStudents(){
     try{ 
         
     $query = "SELECT *
-    FROM  tblStudentDetails ORDER BY [studentForm_ID],[studentClass_ID] ASC";
+             FROM  tblStudentDetails
+             WHERE Status=1 
+             ORDER BY [studentForm_ID],[studentClass_ID] ASC";
 
         $stmt= $db->prepare($query);
         $stmt->execute();
@@ -264,7 +270,9 @@ function getAllTeachers(){
     try{ 
         
     $query = "SELECT *
-    FROM  tblTeacherDetails  ORDER BY employeeStaffID DESC";
+    FROM  tblTeacherDetails
+    WHERE Status=1
+    ORDER BY employeeStaffID DESC";
 
         $stmt= $db->prepare($query);
         $stmt->execute();
@@ -477,6 +485,23 @@ function getStudent($studentID){
         throw $e;
     }
 }
+
+function getSubjectByID($subjectID){
+    global $db;
+
+    try{ 
+        $query = "SELECT * FROM tblSubjects WHERE SubjectID=?";
+        $stmt= $db->prepare($query);
+        $stmt->bindparam(1,$subjectID);
+        $stmt->execute(); 
+     return $stmt->fetch(PDO::FETCH_ASSOC);
+     
+    } catch(\Exception $e) {
+        throw $e;
+    }
+}
+
+
 
 
 function getTeacher($StaffID){
@@ -708,7 +733,7 @@ function getAllTeacherSubjects($user) {
 
                  WHERE tblTeachers_Subjects.[Staff_ID]=:user
                 
-                 ORDER BY [Form] ASC";
+                 ORDER BY [employeeStaffID] ASC";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':user',$user);
         $stmt->execute();
@@ -1171,5 +1196,66 @@ function demote($userId) {
          $stmt->execute();
     } catch (\Exception $e) {
        throw $e;
+    }
+}
+
+
+function DeactivateTeacher($staffID) {
+    global $db;
+    try {
+        $query = "UPDATE tblTeacherDetails SET
+                  Status =2 
+                  WHERE employeeStaffID=:staffID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':staffID', $staffID);  
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+function ReactivateTeacher($staffID) {
+    global $db;
+    try {
+        $query = "UPDATE tblTeacherDetails SET
+                  Status =1 
+                  WHERE employeeStaffID=:staffID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':staffID', $staffID);  
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
+function DeactivateStudent($studentID) {
+    global $db;
+    try {
+        $query = "UPDATE tblStudentDetails SET
+                  Status =2 
+                  WHERE studentID=:studentID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':studentID', $studentID);  
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+function ReactivateStudent($studentID) {
+    global $db;
+    try {
+        $query = "UPDATE tblStudentDetails SET
+                  Status =1 
+                  WHERE studentID=:studentID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':studentID', $studentID);  
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
     }
 }

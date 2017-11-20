@@ -68,7 +68,7 @@
                     <tr>
                        <td>
                           <?php if(!isOwner($user['id'])):?>
-                          <span><a class="bt btn-sm btn-warning" id="deletebtn" href="/MuzindaSchoolDatabase3/editTeacher.php?staffID=<?php echo $user['employeeStaffID']; ?>">DELETE</a></span>
+                          <span><a class="bt btn-sm btn-warning" id="deletebtn" href="/MuzindaSchoolDatabase3/procedures/adjustStatus.php?Status=Deactivate&userId=<?php echo $user['id']; ?>">DELETE</a></span>
                           <?php endif; ?>
                        </td>
                        <td><?php echo $user['employeeStaffID'];?></td>
