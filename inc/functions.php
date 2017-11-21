@@ -546,19 +546,15 @@ function getClassByID($form_ID,$class_ID){
 
 
 
-function getStudentExerciseByID($form_ID,$class_ID,$ExerciseID){
+function getStudentExerciseByID($ExerciseID){
     global $db;
 
     try{ 
         $query = "SELECT * 
               FROM tblExercises
-              WHERE studentForm_ID = :form_ID
-              AND studentClass_ID=:class_ID
-             AND ExerciseID=:ExerciseID";
+              WHERE ExerciseID=:ExerciseID";
         $stmt= $db->prepare($query);
-         $stmt->bindparam(':form_ID',$form_ID);
-         $stmt->bindparam(':class_ID',$class_ID);
-         $stmt->bindparam(':ExerciseID',$ExerciseID);
+        $stmt->bindparam(':ExerciseID',$ExerciseID);
         $stmt->execute(); 
      return $stmt->fetchAll(PDO::FETCH_ASSOC);
      
@@ -959,7 +955,31 @@ function findExerciseByID($NewExerciseID) {
     global $db;
     
     try {
-        $query = "SELECT * FROM tblExercises WHERE ExerciseID =:ExerciseID";
+        $query = "SELECT *,studentFirstName,studentLastName 
+        FROM tblExercises 
+        LEFT JOIN tblStudentDetails
+        ON tblExercises.[student_ID]=tblStudentDetails.[studentID]
+        WHERE tblExercises.[ExerciseID] =:ExerciseID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':ExerciseID', $NewExerciseID);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+function findExerciseInfoByID($NewExerciseID) {
+    global $db;
+    
+    try {
+        $query = "SELECT *,studentFirstName,studentLastName 
+        FROM tblExercises 
+        LEFT JOIN tblStudentDetails
+        ON tblExercises.[student_ID]=tblStudentDetails.[studentID]
+        WHERE tblExercises.[ExerciseID] =:ExerciseID";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':ExerciseID', $NewExerciseID);
         $stmt->execute();
@@ -969,6 +989,7 @@ function findExerciseByID($NewExerciseID) {
         throw $e;
     }
 }
+
 
 
 
@@ -1315,8 +1336,7 @@ function ReactivateStudent($studentID) {
 
 
 
-function updateExercise($student_ID,$ExerciseID,$Topic,
-        $SubTopic,$Title,$HighestPossibleMark,$exerciseMark,
+function updateExercise($student_ID,$ExerciseID,$Topic,$SubTopic,$Title,$HighestPossibleMark,$exerciseMark,
         $exerciseComment,$StudentExerciseID) {
 
     global $db;
@@ -1328,7 +1348,9 @@ function updateExercise($student_ID,$ExerciseID,$Topic,
                   HighestPossibleMark=:HighestPossibleMark,
                   Mark=:exerciseMark,
                   Comment=:exerciseComment
-              WHERE ID=:StudentExerciseID";
+              WHERE student_ID=:student_ID
+              AND ExerciseID=:ExerciseID
+              ";
 
         $stmt = $db->prepare($query);
         $stmt->bindParam(':Topic', $Topic);
@@ -1339,7 +1361,7 @@ $stmt->bindParam(':HighestPossibleMark', $HighestPossibleMark);
         $stmt->bindParam(':exerciseComment',$exerciseComment);
        $stmt->bindParam(':ExerciseID',$ExerciseID);
        $stmt->bindParam(':student_ID',$student_ID);
-    $stmt->bindParam(':StudentExerciseID',$StudentExerciseID);
+    $stmt->bindParam(':student_ID',$student_ID);
 
         return $stmt->execute();
     } catch (\Exception $e) {

@@ -4,7 +4,7 @@
     <tr>
  
       <td>
-          <?php echo $exercise['studentID']; ?>
+          <?php echo $exercise['student_ID']; ?>
       </td>
 
        <td>

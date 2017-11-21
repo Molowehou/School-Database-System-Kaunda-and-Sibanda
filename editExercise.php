@@ -22,7 +22,7 @@
 
 <?php 
      $ExerciseID = request()->get('ExerciseID');
-     $student=findExerciseByID($ExerciseID);
+     $student=findExerciseInfoByID($ExerciseID);
 
 ?>
 
@@ -97,7 +97,7 @@
         <?php
            $ExerciseID = request()->get('ExerciseID'); 
                $i=0;
-               foreach (getExerciseByExerciseID($ExerciseID) as $exercise) {
+               foreach (findExerciseByID($ExerciseID) as $exercise) {
 
                  $numberOfStudents = count($exercise);
                   ++$i; 
