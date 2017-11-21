@@ -951,6 +951,8 @@ function findStudentByStudentID($studentID) {
     }
 }
 
+
+
 function findExerciseByID($NewExerciseID) {
     global $db;
     
@@ -1050,6 +1052,39 @@ function addNewExercise($NewExerciseID,$subject_ID,$form_ID,$class_ID,$student_I
             :Comment,GETDATE())";
     $stmt = $db->prepare($query);
     $stmt->bindParam(':NewExerciseID', $NewExerciseID);
+    $stmt->bindParam(':subject_ID', $subject_ID);
+    $stmt->bindParam(':form_ID', $form_ID);
+    $stmt->bindParam(':class_ID', $class_ID);
+    $stmt->bindParam(':student_ID',$student_ID);
+    $stmt->bindParam(':staff_ID', $staff_ID);
+    $stmt->bindParam(':Topic', $Topic);
+    $stmt->bindParam(':SubTopic', $SubTopic);
+    $stmt->bindParam(':Title', $Title);
+    $stmt->bindParam(':HighestPossibleMark',$HighestPossibleMark);
+    $stmt->bindParam(':Mark', $exerciseMark);
+    $stmt->bindParam(':Comment', $exerciseComment);       
+        return $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+function addNewTempExercise($ExerciseID,$subject_ID,$form_ID,$class_ID,$student_ID,$staff_ID,$Topic,$SubTopic,$Title,$HighestPossibleMark,$exerciseMark,$exerciseComment) {
+
+    global $db; 
+    try {
+        $query = "INSERT INTO [tblExerciseTempTable] (
+       [ExerciseID],[subject_ID],[form_ID],
+       [class_ID],[student_ID],
+       [staff_ID],[Topic],[subTopic],[Title],
+       [HighestPossibleMark],[Mark],[Comment],[ExcerciseDate])
+
+         VALUES   (:ExerciseID,:subject_ID,:form_ID,:class_ID,
+            :student_ID,:staff_ID,:Topic,:SubTopic,
+            :Title,:HighestPossibleMark,:Mark,
+            :Comment,GETDATE())";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':ExerciseID', $ExerciseID);
     $stmt->bindParam(':subject_ID', $subject_ID);
     $stmt->bindParam(':form_ID', $form_ID);
     $stmt->bindParam(':class_ID', $class_ID);
@@ -1368,3 +1403,61 @@ $stmt->bindParam(':HighestPossibleMark', $HighestPossibleMark);
         throw $e;
     }
 }
+
+
+
+
+function UpdateTable() {
+    global $db;
+    try {
+        $query = "UPDATE tblExercises
+                   SET
+            tblExercises.[Mark] = tblExerciseTempTable.[Mark],
+             tblExercises.[Comment] = tblExerciseTempTable.[Comment]
+                  FROM
+                tblExercises 
+                 INNER JOIN
+             tblExerciseTempTable
+              ON 
+    tblExercises.[student_ID] = tblExerciseTempTable.[student_ID]";
+        $stmt = $db->prepare($query); 
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
+function CreateMarksTempTable() {
+    global $db;
+    try {
+        $query = "CREATE TABLE [dbo].[tblExerciseTempTable](
+    ExerciseID int NULL,subject_ID int NULL,
+    form_ID int NULL,class_ID int NULL,
+    student_ID nvarchar(50) NULL,staff_ID nvarchar(50) NULL,
+    Topic nvarchar(50) NULL,subTopic nvarchar(50) NULL,
+    Title nvarchar (50) NULL,HighestPossibleMark int NULL,
+    Mark int NULL,Comment nvarchar(1000) NULL,
+    ExcerciseDate date NULL)";
+        $stmt = $db->prepare($query); 
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
+function DeleteMarksTempTable() {
+    global $db;
+    try {
+        $query = "IF OBJECT_ID('tblExerciseTempTable', 'U') IS NOT NULL 
+  DROP TABLE dbo.tblExerciseTempTable";
+        $stmt = $db->prepare($query); 
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+

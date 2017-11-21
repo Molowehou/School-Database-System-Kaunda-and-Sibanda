@@ -96,9 +96,7 @@
        $form = request()->get('form');
        $class = request()->get('class');
        $subject = request()->get('subject'); 
-                echo  $form;
-                echo  $class;
-               
+
                $i=0;
                foreach (getClassByID($form,$class) as $student) {
 

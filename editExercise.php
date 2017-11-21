@@ -21,12 +21,15 @@
           <?php echo display_errors(); ?>
 
 <?php 
+     $form = request()->get('form');
+     $class = request()->get('class');
+     $subject = request()->get('subject');
      $ExerciseID = request()->get('ExerciseID');
      $student=findExerciseInfoByID($ExerciseID);
 
 ?>
 
-<form class = "form-horizontal" method= "post" action = "procedures/doEditExercise.php?exercise=<?php echo $ExerciseID ; ?> & form=<?php echo $student['form_ID'];?> & class=<?php echo $student['class_ID'];?>& student=<?php echo $student['student_ID'];?>  ">
+<form class = "form-horizontal" method= "post" action = "procedures/DoAddTemporaryExercise.php?exercise=<?php echo $ExerciseID ; ?> & form=<?php echo $student['form_ID'];?> & class=<?php echo $student['class_ID'];?>& student=<?php echo $student['student_ID'];?>& subject=<?php echo $student['subject_ID'];?>   ">
 
            <div class="modal-body row">
                 
