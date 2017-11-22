@@ -1410,15 +1410,20 @@ $stmt->bindParam(':HighestPossibleMark', $HighestPossibleMark);
 function UpdateTable() {
     global $db;
     try {
-        $query = "UPDATE tblExercises
-                   SET
-            tblExercises.[Mark] = tblExerciseTempTable.[Mark],
-             tblExercises.[Comment] = tblExerciseTempTable.[Comment]
-                  FROM
-                tblExercises 
-                 INNER JOIN
-             tblExerciseTempTable
-              ON 
+        $query = "UPDATE
+    tblExercises
+   SET
+    tblExercises.[Mark] = tblExerciseTempTable.[Mark],
+    tblExercises.[Comment] = tblExerciseTempTable.[Comment],
+    tblExercises.[Topic] = tblExerciseTempTable.[Topic],
+    tblExercises.[subTopic] = tblExerciseTempTable.[subTopic],
+    tblExercises.[Title] = tblExerciseTempTable.[Title],
+    tblExercises.[HighestPossibleMark] = tblExerciseTempTable.[HighestPossibleMark]
+  FROM
+     tblExercises 
+  INNER JOIN
+    tblExerciseTempTable
+  ON 
     tblExercises.[student_ID] = tblExerciseTempTable.[student_ID]";
         $stmt = $db->prepare($query); 
          $stmt->execute();

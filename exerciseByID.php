@@ -14,6 +14,13 @@
          require_once __DIR__ . '/inc/nav.php';
     ?>
 
+    <?php
+       $form = request()->get('form');
+       $class = request()->get('class');
+       $subject = request()->get('subject');
+
+    ?>
+
 	<main>
 		<div class="main-content"> <!--main content-->
          <h5 class="section-title">EXERCISES LIST</h5>
@@ -30,12 +37,7 @@
             <div class="form-group">
                <div class="col-sm-offset-3 col-sm-10">
 
-                <?php
-                   $form = request()->get('form');
-                   $class = request()->get('class');
-                   $subject = request()->get('subject');
-
-                ?> 
+ 
 
                <a  class="btn" id="btnSave" href="addNewExercise.php?class=<?php echo $class;?> & subject=<?php echo $subject;?> & form=<?php echo $form; ?>">ADD NEW EXERCISE</a>
             </div>
