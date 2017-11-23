@@ -2,7 +2,7 @@
 				
 				<ul id="menu">	
 					<li><a href="index.php">HOME</a></li>
-					<li><a href="studentDashboard.php">STUDENT DATABASE</a></li>
+					<li><a href="studentFormDashboard.php">STUDENT DATABASE</a></li>
 					<li><a href="staffDashboard.php">STAFF DATABASE</a></li>
 					<li><a href="marksDashboard.php">MARKS DATABASE</a></li>
 					<li><a href="libraryDashboard.php">LIBRARY DATABASE</a></li>

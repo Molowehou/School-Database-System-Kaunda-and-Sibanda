@@ -45,7 +45,7 @@
         <select class="form-control input-lg" id="Class" name="Class">
           <?php foreach (getAllClasses()as $class) {
           
-           echo "<option value=".$class['ID'].">";
+           echo "<option value=".$class['ClassID'].">";
            echo $class['Class'];
            echo "</option>";
           } ?>

@@ -43,6 +43,5 @@ $jwt =\Firebase\JWT\JWT::encode([
 $accessToken = new \Symfony\Component\HttpFoundation\Cookie('access_token',$jwt,$expTime,'/', getenv('COOKIE_DOMAIN'));
 
 
-  $session->getFlashBag()->add('success', 'Successfully Logged In');
 redirect('index.php',['cookies'=>[$accessToken]]); 
  

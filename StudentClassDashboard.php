@@ -18,11 +18,16 @@
     <?php
          require_once __DIR__ . '/inc/nav.php';
     ?>
+    <?php
+         $form = request()->get('form');
+         $class = request()->get('class');
+    ?>
 
-	<main>
-		<div class="main-content"> <!--main content-->
-	      <h5 class="section-title">STUDENT DATABASE</h5>
-        <a class="btn" href="addStudent.php">ADD NEW STUDENT</a>
+
+  <main>
+    <div class="main-content"> <!--main content-->
+        <h5 class="section-title">STUDENT LIST</h5>
+        <!-- <a class="btn" href="addStudent.php">ADD NEW STUDENT</a> -->
         <a class="btn" href="Reports/studentList.php" target="_blank">Print</a>
         <?php echo display_errors(); ?>
              
@@ -41,17 +46,21 @@
   
               <tbody>
               
-                <?php foreach (getAllStudents() as $student) {
+                <?php 
+      
+
+
+            foreach (getClassByID($form,$class) as $student) {
                    include __DIR__ ."/inc/student.php";} 
                  ?>
                 
               </tbody>
          </table>
 
-				
-		</div> <!--/main content-->
-	</main>
-			
+        
+    </div> <!--/main content-->
+  </main>
+      
 
    <?php 
      require_once __DIR__ . '/inc/footer.php';

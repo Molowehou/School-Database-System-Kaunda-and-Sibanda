@@ -254,9 +254,9 @@ function getAllStudents(){
     $query = "SELECT *,Class,Form
              FROM  tblStudentDetails
              LEFT OUTER JOIN tblForm
-             ON tblStudentDetails .[studentForm_ID]=tblForm.[ID]
+             ON tblStudentDetails .[studentForm_ID]=tblForm.[FormID]
              LEFT OUTER JOIN tblClass
-             ON tblStudentDetails .[studentClass_ID]=tblClass.[ID] 
+             ON tblStudentDetails .[studentClass_ID]=tblClass.[ClassID] 
              WHERE Status=1             
              ORDER BY [studentForm_ID],[studentClass_ID] ASC";
 
@@ -529,10 +529,15 @@ function getClassByID($form_ID,$class_ID){
     global $db;
 
     try{ 
-        $query = "SELECT * 
-              FROM tblStudentDetails
-              WHERE studentForm_ID = :form_ID
-              AND studentClass_ID=:class_ID";
+        $query = "SELECT *,[Form],[Class]
+        FROM tblStudentDetails
+        LEFT OUTER JOIN tblForm
+        ON tblStudentDetails .[studentForm_ID]=tblForm.[FormID]
+        LEFT OUTER JOIN tblClass
+     ON tblStudentDetails .[studentClass_ID]=tblClass.[ClassID]
+        WHERE studentForm_ID = :form_ID
+        AND studentClass_ID=:class_ID
+        AND Status=1";
         $stmt= $db->prepare($query);
          $stmt->bindparam(':form_ID',$form_ID);
          $stmt->bindparam(':class_ID',$class_ID);
@@ -762,17 +767,17 @@ function getAllTeacherSubjects($user) {
                  [SubjectName],[Form],[Class]
                  FROM tblTeacherDetails
                  
-                 INNER JOIN tblTeachers_Subjects 
+                 LEFT JOIN tblTeachers_Subjects 
                  ON tblTeacherDetails.[employeeStaffID]=tblTeachers_Subjects.[Staff_ID]
                  
-                 INNER JOIN tblSubjects 
+                 LEFT JOIN tblSubjects 
                  ON tblTeachers_Subjects .[Subject_ID]=tblSubjects.[SubjectID]
                  
                  INNER JOIN tblForm
-                 ON tblTeachers_Subjects .[Form_ID]=tblForm.[ID]
+                 ON tblTeachers_Subjects .[Form_ID]=tblForm.[FormID]
 
-                 INNER JOIN tblClass
-                 ON tblTeachers_Subjects .[Class_ID]=tblClass.[ID]
+                 LEFT JOIN tblClass
+                 ON tblTeachers_Subjects .[Class_ID]=tblClass.[ClassID]
 
                  WHERE tblTeachers_Subjects.[Staff_ID]=:user
                 
@@ -802,10 +807,10 @@ function getAllTeachersBySubjects() {
                  ON tblTeachers_Subjects .[Subject_ID]=tblSubjects.[SubjectID]
 
                  INNER JOIN tblForm
-                 ON tblTeachers_Subjects .[Form_ID]=tblForm.[ID]
+                 ON tblTeachers_Subjects .[Form_ID]=tblForm.[FormID]
 
                  INNER JOIN tblClass
-                 ON tblTeachers_Subjects .[Class_ID]=tblClass.[ID]
+                 ON tblTeachers_Subjects .[Class_ID]=tblClass.[ClassID]
 
                  ORDER BY [employeeStaffID] ASC";
         $stmt = $db->prepare($query);
@@ -870,6 +875,37 @@ function getExerciseByID($form,$class,$subject) {
         throw $e;
     }
 }
+
+
+
+function getDistinctClass() {
+    global $db;
+    
+    try {
+        $query = "
+       SELECT DISTINCT [Form],[Class],studentClass_ID,studentForm_ID,tblForm.[FormID],tblClass.[ClassID]
+       FROM tblForm
+       LEFT JOIN tblStudentDetails
+       ON tblForm.[FormID]=tblStudentDetails.[studentForm_ID]
+       LEFT JOIN tblClass
+       ON tblStudentDetails.[studentClass_ID]=tblClass.[ClassID]
+       ORDER BY tblForm.[Form],tblClass.[Class]"; 
+
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
+
+
+
+
 
 
 
