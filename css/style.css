@@ -1,8 +1,4 @@
 
-.form-control{
-
-}
-
 
 .studentCard{
 	height: 30px;
@@ -138,7 +134,7 @@ label.control-label {
 }
 
 .form_title {
-	font-size: 2em;
+	font-size: 1em;
 }
 
 .form-group {
@@ -153,3 +149,4 @@ label.control-label {
 .reg_form {
 	background:#c5c6c7; 
 }
+

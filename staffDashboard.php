@@ -26,6 +26,7 @@
 	      <h5 class="section-title">STAFF DATABASE</h5>
         <a class="btn" href="addTeacher.php">ADD NEW TEACHER</a>
         <?php echo display_errors(); ?>
+        <?php echo display_success(); ?>
              
           <table class="table">
               <thead>

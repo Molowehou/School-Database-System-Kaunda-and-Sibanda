@@ -1,7 +1,7 @@
 		<footer>
 
 			<div class="main_footer">
-				<p>&copy; ZimSchola Hub <?php echo date('Y')?></p>
+				<p>&copy; The School Management System <?php echo date('Y')?></p>
 			</div>
 
 			<script src="/js/jquery.js"></script>

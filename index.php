@@ -19,8 +19,8 @@
         
         <?php echo display_errors(); ?>
 
-
-        <h4 class= "mb-6 text-center bg-secondary text-white">CLASSES TAUGHT</h4>
+          <!-- <h5 class="section-title">Classes Taught</h5> -->
+        
 
                   <div class="list-group">
                    <?php 

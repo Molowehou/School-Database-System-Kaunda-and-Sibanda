@@ -18,20 +18,23 @@ body {
 /* Main form container */
 
 .wrapper form {
-	margin-top: 20px;
-	margin-left: 0;
-	padding: 26px 24px 46px;
+	margin-top: -50px;
+	margin-left: 0px;
+	padding: 26px 24px 24px;
 	background: #1f2833;
 	box-shadow: -1px -1px 5px rgba(0,0,0,.70);
 	overflow: hidden;
 	border-radius:5px;
+
 }
 
 #log_form{
+
 	width: 320px;
 	padding: 10% 0 0;
 	margin: auto;
 	text-align: left;
+	margin-left: 270px;
 }
 
 /* Form nputs */
