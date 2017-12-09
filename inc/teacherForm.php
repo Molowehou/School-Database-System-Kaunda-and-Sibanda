@@ -2,32 +2,6 @@
 
 <!-- TEACHER Details -->
 
-
-    <div class="modal-body row"> <!-- Start of column which enables the creation of two columns-->
-
-          <div class="col-sm-3 "><!--Start of 3rd Column -->
-
-            <div class="form-group">
-               <div class="col-sm-offset-3 col-sm-10">
-               <button type="submit" class="btn" id="btnSave"><?php if(isset($buttonText)){echo $buttonText;} else{
-              echo "SAVE NEW TEACHER";}?></button>
-            </div>
-         </div>
-
-          </div><!-- End of 3rd Column-->
-
-                    <div class="col-sm-3 "><!--Start of 3rd Column -->
-
-            <div class="form-group">
-               <div class="col-sm-offset-3 col-sm-10">
-               <button type="submit" class="btn" id="btnCancel">CANCEL</button>
-            </div>
-         </div>
-
-          </div><!-- End of 3rd Column-->
-
- </div><!-- End of column which enables the creation of two columns-->
-
 <div class="reg_form">
    <hr>
    <h6 class="form_title">TEACHER INFORMATION</h6>

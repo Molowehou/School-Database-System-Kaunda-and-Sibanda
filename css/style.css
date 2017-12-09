@@ -85,14 +85,54 @@ label,h2{
 }
 
 #btnSave{
-	width:180px;
+	width:95%;
 	background-color:blue;
+	font-size: 13px;
+
 }
 #btnCancel{
-	width:180px;
-	background-color:red;
-	margin-left:400px;
+	width:95%;
+	background-color:#1f2833;
+	margin-top: 15px;
 }
+#btnDelete{
+	width:95%;
+	background-color:red;
+	margin-top: 15px;
+}
+
+#btnInDelete{
+	background-color:red;
+	text-decoration: none;
+	text-align: center;
+}
+
+#btnOutDelete{
+	background-color:#1f2833;
+	text-decoration: none;
+	text-align: center;
+}
+
+
+#btnEdit{
+	width:95%;
+	background-color:#1f2833;
+	margin-top: 15px;
+}
+
+
+
+#modalSave{
+background-color:blue;	
+}
+
+#modalCancel{
+background-color:red;	
+}
+
+
+
+
 
 
 .well{
@@ -147,6 +187,28 @@ label.control-label {
 }
 
 .reg_form {
-	background:#c5c6c7; 
+	/*background:#c5c6c7; */
+
 }
 
+.list-group-item {
+	text-transform: uppercase;
+	/*background-color: #483d8b;*/
+	text-align: left;
+	/*border-color: black;*/
+	color: black;
+
+}
+
+aside{
+	background-color: #c5c6c7;
+}
+
+
+.modal-dialog{
+	border-radius: 100px;
+}
+
+.modal-body{
+	border-radius: 10px;
+}

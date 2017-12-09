@@ -22,7 +22,7 @@
 
         <form class = "form-horizontal" method= "post" action = "procedures/addTeacher.php">
             <?php include __DIR__ ."/inc/teacherForm.php"; ?>
-        </form>
+       
              
 
 
@@ -30,11 +30,21 @@
     </div> <!--/main content-->
   </main>
       
+     <aside>
+     <H4 class="section-title"></H4>
 
+      <button type="submit" class="btn" id="btnSave"><?php if(isset($buttonText)){echo $buttonText;} else{
+              echo "SAVE NEW TEACHER";}?></button>
+
+        <a class="btn" id="btnDelete" href="index.php">Cancel</a>
+           
+   
+
+  </aside>
 
 
   
-    
+     </form>
   <?php 
      require_once __DIR__ . '/inc/footer.php';
   ?>

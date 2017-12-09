@@ -26,30 +26,7 @@
 	      <h5 class="section-title">ADMIN SECTION</h5>
           <?php echo display_errors(); ?>
 
-                    <!-- Button to trigger modal -->
-                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Register New User
-                       </button>
-
-        <!-- Modal -->
-                       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                         <div class="modal-dialog" role="document">
-                           <div class="modal-content">
-                             
-                                 <div class="modal-body">
-                                 <form class = "form-horizontal" method= "post" action = "procedures/DoRegister.php">
-              
-                                     <?php include __DIR__ ."/inc/userRegistrationForm.php"; ?>
-
-                                 </form>
-
-                             </div>   <!--/Modal-body --> 
-                           </div> <!--/Modal-content --> 
-
-                        </div> <!--/Modal-dialog -->
-                       
-
-
-                   </div> <!--End of Modal div -->
+                  
 
              
              <table class = "table">
@@ -68,7 +45,7 @@
                     <tr>
                        <td>
                           <?php if(!isOwner($user['id'])):?>
-                          <span><a class="bt btn-sm btn-warning" id="deletebtn" href="/MuzindaSchoolDatabase3/procedures/adjustStatus.php?Status=Deactivate&userId=<?php echo $user['id']; ?>">DELETE</a></span>
+                          <span><a class="bt btn-sm btn-warning" id="btnInDelete" href="/MuzindaSchoolDatabase3/procedures/adjustStatus.php?Status=Deactivate&userId=<?php echo $user['id']; ?>">DELETE</a></span>
                           <?php endif; ?>
                        </td>
                        <td><?php echo $user['employeeStaffID'];?></td>
@@ -94,6 +71,38 @@
 	</main>
 			
 
+  <aside>
+    <H4 class="section-title"></H4>
+
+      <!-- Button to trigger modal -->
+                       <button type="button" class="btn" id="btnSave" data-toggle="modal" data-target="#exampleModal">Register New User
+                       </button>
+
+        <!-- Modal -->
+                       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                         <div class="modal-dialog" role="document">
+                           <div class="modal-content">
+                             
+                                 <div class="modal-body">
+                                 <form class = "form-horizontal" method= "post" action = "procedures/DoRegister.php">
+              
+                                     <?php include __DIR__ ."/inc/userRegistrationForm.php"; ?>
+
+                                 </form>
+
+                             </div>   <!--/Modal-body --> 
+                           </div> <!--/Modal-content --> 
+
+                        </div> <!--/Modal-dialog -->
+                       
+
+
+                   </div> <!--End of Modal div -->
+
+
+    <a class="btn" id="btnEdit" href="index.php">Main Menu</a>
+
+  </aside>
 
 
 

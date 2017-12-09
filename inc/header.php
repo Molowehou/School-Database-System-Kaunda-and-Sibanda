@@ -3,7 +3,7 @@
 		<header class="clearfix">
 			<div id="header_content" class="clearfix">
 				<h1 class="title">
-					<a href="#">The School Management System</a></h1>
+					<a href="#"><i class="pe-7s-server"></i>&nbsp;The School Management System</a></h1>
 
 
 				<?php  if (!isAuthenticated()): ?>
@@ -24,8 +24,8 @@
                      </button>
                      
                      <ul class="dropdown-menu">
-                         <li><a class="btn" id="changepwd"  href="account.php">CHANGE PASSWORD</a></li>
-                         <li><a class="btn" id="logout" href="procedures/DoLogout.php">LOG OUT</a></li>
+                         <li><a class="btn" id="changepwd"  href="account.php"><i class="pe-7s-server"></i>&nbsp;CHANGE PASSWORD</a></li>
+                         <li><a class="btn" id="logout" href="procedures/DoLogout.php"><i class="pe-7s-server"></i>&nbsp;LOG OUT</a></li>
                       </ul>
                 </div>
 

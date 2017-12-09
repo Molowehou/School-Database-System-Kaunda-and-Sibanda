@@ -690,6 +690,25 @@ function deleteBook($bookId) {
 }
 
 
+function deleteExercise($ExerciseID) {
+    global $db;
+    try {
+        $query = "DELETE FROM tblExercises WHERE ExerciseID=:ExerciseID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':ExerciseID', $ExerciseID);
+        return $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
+
+
+
+
+
 function vote($bookId, $score) {
     global $db;
     $personId = 0;

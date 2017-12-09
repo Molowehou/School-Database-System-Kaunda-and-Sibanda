@@ -53,7 +53,7 @@
       </div>
     </div>
 
-     <div class="modal-footer text-center">
-       <button type="submit" class="btn btn-primary col-sm-5">Save</button>
-        <button type="button" class="btn btn-secondary col-sm-5" data-dismiss="modal">Cancel</button>     
-      </div>
+     
+       <button type="submit" class="btn" id="modalSave">Save</button>
+        <button type="button" class="btn" id="modalCancel" data-dismiss="modal">Cancel</button>     
+     

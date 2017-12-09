@@ -22,8 +22,6 @@
 	<main>
 		<div class="main-content"> <!--main content-->
 	      <h5 class="section-title">STUDENT DATABASE</h5>
-        <a class="btn" href="addStudent.php">ADD NEW STUDENT</a> 
-        <a class="btn" href="Reports/studentList.php" target="_blank">Print</a>
               
         <div class="list-group">
           <?php 
@@ -38,6 +36,19 @@
                   </div>
 		</div> <!--/main content-->
 	</main>
+ 
+  <aside>
+    <H4 class="section-title"></H4>
+
+    <a class="btn" id="btnSave" href="addStudent.php"><i class="pe-7s-note"></i>&nbsp;ADD NEW STUDENT</a>
+
+
+    <a class="btn" id="btnEdit" href="Reports/studentList.php" target="_blank">Print</a>
+
+  </aside>
+
+
+
 			
 
    <?php 

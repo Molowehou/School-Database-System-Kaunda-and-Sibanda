@@ -24,7 +24,7 @@
 	<main>
 		<div class="main-content"> <!--main content-->
 	      <h5 class="section-title">STAFF DATABASE</h5>
-        <a class="btn" href="addTeacher.php">ADD NEW TEACHER</a>
+        
         <?php echo display_errors(); ?>
         <?php echo display_success(); ?>
              
@@ -50,9 +50,19 @@
 				
 		</div> <!--/main content-->
 	</main>
+
+  <aside>
+     <H4 class="section-title"></H4>
+
+      <a class="btn" id="btnSave" href="addTeacher.php">ADD NEW TEACHER</a>
+           
+  
+  </aside>
 			
 
  
+
+
 		
   <?php 
      require_once __DIR__ . '/inc/footer.php';

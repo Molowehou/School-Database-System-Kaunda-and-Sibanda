@@ -74,15 +74,28 @@ $buttonText = 'Save Changes';
          
           <form class = "form-horizontal" method= "post" action = "procedures/editStudent.php">
           	   <input type="hidden" name="studentID" value="<?php echo $student['studentID'];?>"/>
-              <?php include_once __DIR__ ."/inc/StudentForm.php"; ?>
-          </form>
+              <?php include_once __DIR__ ."/inc/StudentForm2.php"; ?>
+          
 
 				
 		</div> <!--/main content-->
 	</main>
 
+    <aside>
+       <H4 class="section-title"></H4>
+
+       <button type="submit" class="btn" id="btnSave"><i class="pe-7s-note"></i>&nbsp;Save Changes</button>
+
+
+       <a class="btn" id="btnDelete" href="index.php">Cancel</a>
+
+  </aside>
+
+
 
   
+
+  </form>
 		
    <?php 
      require_once __DIR__ . '/inc/footer.php';

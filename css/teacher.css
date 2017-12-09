@@ -51,7 +51,7 @@ header {
 	background:#1f2833;
 	box-shadow: -1px -1px 2px #1f2833,1px 1px 2px #66fcf1;
 	z-index:99;
-	width: 
+
 	}
 
 ul#menu div {
@@ -73,7 +73,7 @@ ul#menu div {
 
 #main-menu li {
 	background:#1f2833;
-	height: 6.5em;
+	height: 3.5em;
 	border:1px solid #1f2833;
 	border-radius:5px;
 	box-shadow: -1px -1px 2px #1f2833,1px 1px 2px #66fcf1;
@@ -115,6 +115,7 @@ div a {
 	box-shadow: 1px 1px 2px #1f2833;
 	transition-duration: 0.4s;
 	color: #fff;
+
 }
 			
 			/*Time table*/
@@ -151,11 +152,12 @@ tr > th {
 
 .section-title {
 	background:#1f2833;
-	padding:1em;
+	padding:.3em;
 	border:1px solid #1f2833;
 	border-radius:5px;
 	box-shadow: -1px -1px 2px #1f2833;
 	text-shadow: -1px -1px 2px #1f2833,1px 1px 2px #66fcf1;
+	height: 35px;
 }
 
 table .headings {
@@ -169,6 +171,7 @@ tr > td {
 	background: #f6f6f6;
 	font-weight: normal;
 	color: #454545;
+	
 }
 
 		
@@ -290,7 +293,10 @@ footer {
 	.events {
 		float:none;
 	}
-	/* ---- Float clearfix ---- */
+
+
+
+/* ---- Float clearfix ---- */
 
 	.clearfix::after {
 		content: " ";

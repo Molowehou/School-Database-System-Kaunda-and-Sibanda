@@ -35,6 +35,11 @@
         <!-- <link rel="stylesheet" href="css/bootstrap.min.css"></link>  -->
         <!-- Custom CSS -->
         <link rel="stylesheet" href="css/style.css"></link>
+
+<!-- Icons and Fonts -->
+<link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+
+
 </head>
 
  <body> <!--Start of Body -->

@@ -1,30 +1,6 @@
 
-
+<div class="reg_form">
 <!-- Student Details -->
-
-
-    <div class="modal-body row"> <!-- enables creation of two columns-->
-        <div class="col-sm-3 "><!--Start of 3rd Column -->
-
-         <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-10">
-               <button type="submit" class="btn" id="btnSave"><?php if(isset($buttonText)){echo $buttonText;} else{
-              echo "SAVE NEW STUDENT";}?></button>
-            </div>
-         </div>
-        </div><!-- End of 3rd Column-->
-
-        <div class="col-sm-3 "><!--Start of 3rd Column -->
-            <div class="form-group">
-               <div class="col-sm-offset-3 col-sm-10">
-                 <button type="submit" class="btn" id="btnCancel">CANCEL</button>
-              </div>
-            </div>
-        </div><!-- End of 3rd Column-->
-
- </div><!-- End of column which enables the creation of two columns-->
-
-
 <hr>
 <h6 class="form_title">STUDENT INFORMATION</h6>
 <hr>
@@ -46,7 +22,7 @@
     <label for="firstName" class="col-sm-3 control-label">First Name</label>
     <div class="col-sm-9">
         <input type="text" class="form-control" id="firstName" name="firstName" placeholder=""
-         value="<?php if(isset($firstName)){echo $firstName; }?>">
+         value="<?php if(isset($firstName)){echo $firstName; }?>" readonly="readonly">
     </div>
 </div>
 
@@ -54,7 +30,7 @@
     <label for="middleName" class="col-sm-3 control-label">Middle Name</label>
     <div class="col-sm-9">
         <input type="text" class="form-control" id="middleName" name="middleName" placeholder=""
-         value="<?php if(isset($middleName)){echo $middleName; }?>">
+         value="<?php if(isset($middleName)){echo $middleName; }?>" readonly="readonly">
     </div>
 </div>
 
@@ -63,13 +39,13 @@
     <label for="lastName" class="col-sm-3 control-label">Last Name</label>
     <div class="col-sm-9">
         <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" 
-        value="<?php if(isset($lastName)){echo $lastName; }?>">
+        value="<?php if(isset($lastName)){echo $lastName; }?>" readonly="readonly">
     </div>
 </div>
 
     <div class="form-group">
       <label for="gender" class="col-lg-3 control-label">Gender</label>
-      <div class="col-sm-3">
+      <div class="col-sm-3" readonly="readonly">
         <select class="input-sm" id="gender" name="gender">
           <option <?php if(isset($gender)&& $gender==1){echo "selected"; }?> value="1">Male</option>
           <option <?php if(isset($gender)&& $gender==2){echo "selected"; }?> value="2">Female</option>
@@ -83,14 +59,14 @@
     <label for="dateOfBirth" class="col-sm-3 control-label">Date of Birth</label>
     <div class="col-sm-9">
         <input type="text" class="form-control" id="dateOfBirth" name="dateOfBirth" placeholder="" 
-        value="<?php if(isset($dateOfBirth)){echo $dateOfBirth; }?>">
+        value="<?php if(isset($dateOfBirth)){echo $dateOfBirth; }?>" readonly="readonly">
     </div>
 </div>
 
 <div class="form-group">
     <label for="birthEntryNo" class="col-sm-3 control-label">Birth Entry No.</label>
     <div class="col-sm-9">
-        <input type="text" class="form-control" id="birthEntryNo" name="birthEntryNo" placeholder="" value="<?php if(isset($birthEntryNo)){echo $birthEntryNo; }?>">
+        <input type="text" class="form-control" id="birthEntryNo" name="birthEntryNo" placeholder="" value="<?php if(isset($birthEntryNo)){echo $birthEntryNo; }?>" readonly="readonly">
     </div>
 </div>
 
@@ -98,7 +74,7 @@
     <label for="NationalID" class="col-sm-3 control-label">National ID</label>
     <div class="col-sm-9">
         <input type="text" class="form-control" id="NationalID" name="NationalID" placeholder=""
-         value="<?php if(isset($NationalID)){echo $NationalID; }?>">
+         value="<?php if(isset($NationalID)){echo $NationalID; }?>" readonly="readonly">
     </div>
 </div>
 
@@ -113,7 +89,7 @@
 <div class="form-group">
     <label for="formerSchool" class="col-sm-3 control-label">Former School</label>
     <div class="col-sm-9">
-        <input type="text" class="form-control" id="formerSchool" name="formerSchool" placeholder="" value="<?php if(isset($formerSchool)){echo $formerSchool; }?>">
+        <input type="text" class="form-control" id="formerSchool" name="formerSchool" placeholder="" value="<?php if(isset($formerSchool)){echo $formerSchool; }?>" readonly="readonly">
     </div>
 </div>
 
@@ -121,7 +97,7 @@
 <div class="form-group">
       <label for="specialNeed" class="col-lg-3 control-label">Special Need</label>
       <div class="col-sm-9">
-        <textarea class="form-control" rows="3" id="specialNeed" name="specialNeed" >
+        <textarea class="form-control" rows="3" id="specialNeed" name="specialNeed" readonly="readonly" >
           <?php if(isset($specialNeed)){echo $specialNeed; }?>
         </textarea>
       </div>
@@ -131,7 +107,7 @@
 <div class="form-group">
       <label for="homeAddress" class="col-lg-3 control-label">Home Address</label>
       <div class="col-sm-9">
-        <textarea class="form-control" rows="3" id="homeAddress" name="homeAddress">
+        <textarea class="form-control" rows="3" id="homeAddress" name="homeAddress" readonly="readonly">
           <?php if(isset($homeAddress)){echo $homeAddress; }?>
         </textarea>
       </div>
@@ -139,7 +115,7 @@
 
       <div class="form-group">
       <label for="form" class="col-lg-3 control-label">Form</label>
-      <div class="col-sm-3">
+      <div class="col-sm-3" readonly="readonly">
         <select class="input-sm" id="form" name="form">
            <option <?php if(isset($form) && $form==1){echo "selected"; }?> value="1">Form 1</option>
            <option <?php if(isset($form) && $form==2){echo "selected"; }?> value="2">Form 2</option>
@@ -154,7 +130,7 @@
 
     <div class="form-group">
       <label for="class" class="col-lg-3 control-label">Class</label>
-      <div class="col-sm-3">
+      <div class="col-sm-3" readonly="readonly">
         <select class="input-sm" id="class" name="class">
            <option <?php if(isset($class) && $class==1){echo "selected"; }?> value="1">A1</option>
            <option <?php if(isset($class) && $class==2){echo "selected"; }?> value="2">A2</option>
@@ -188,7 +164,7 @@
 
     <div class="form-group">
       <label for="guardianTitle" class="col-lg-3 control-label">Title</label>
-      <div class="col-sm-3">
+      <div class="col-sm-3" readonly="readonly">
         <select class="input-sm" id="guardianTitle" name="guardianTitle">
           <option <?php if(isset($guardianTitle)&& $guardianTitle==1){echo "selected"; }?> value="1">Mr</option>
           <option <?php if(isset($guardianTitle)&& $guardianTitle==2){echo "selected"; }?> value="2">Mrs</option>
@@ -200,14 +176,14 @@
 <div class="form-group">
     <label for="guardianFirstName" class="col-sm-3 control-label">First Name</label>
     <div class="col-sm-9">
-        <input type="text" class="form-control" id="guardianFirstName" name="guardianFirstName" placeholder="" value="<?php if(isset($guardianFirstName)){echo $guardianFirstName; }?>">
+        <input type="text" class="form-control" id="guardianFirstName" name="guardianFirstName" placeholder="" value="<?php if(isset($guardianFirstName)){echo $guardianFirstName; }?>" readonly="readonly">
     </div>
 </div>
 
 <div class="form-group">
     <label for="guardianMiddleName" class="col-sm-3 control-label">Middle Name</label>
     <div class="col-sm-9">
-        <input type="text" class="form-control" id="guardianMiddleName" name="guardianMiddleName" placeholder="" value="<?php if(isset($guardianMiddleName)){echo $guardianMiddleName; }?>">
+        <input type="text" class="form-control" id="guardianMiddleName" name="guardianMiddleName" placeholder="" value="<?php if(isset($guardianMiddleName)){echo $guardianMiddleName; }?>" readonly="readonly">
     </div>
 </div>
 
@@ -215,7 +191,7 @@
 <div class="form-group">
     <label for="guardianlastName" class="col-sm-3 control-label">Last Name</label>
     <div class="col-sm-9">
-        <input type="text" class="form-control" id="guardianlastName" name="guardianlastName" placeholder="" value="<?php if(isset($guardianlastName)){echo $guardianlastName; }?>">
+        <input type="text" class="form-control" id="guardianlastName" name="guardianlastName" placeholder="" value="<?php if(isset($guardianlastName)){echo $guardianlastName; }?>" readonly="readonly">
     </div>
 </div>
 
@@ -223,7 +199,7 @@
 <div class="form-group">
     <label for="guardianNationalID" class="col-sm-3 control-label">National ID</label>
     <div class="col-sm-9">
-        <input type="text" class="form-control" id="guardianNationalID" name="guardianNationalID" placeholder="" value="<?php if(isset($guardianNationalID)){echo $guardianNationalID; }?>">
+        <input type="text" class="form-control" id="guardianNationalID" name="guardianNationalID" placeholder="" value="<?php if(isset($guardianNationalID)){echo $guardianNationalID; }?>" readonly="readonly">
     </div>
 </div>
 
@@ -231,13 +207,13 @@
     <label for="guardianRelationshipToStudent" class="col-sm-3 control-label">Relationship To Student</label>
     <div class="col-sm-6">
         <input type="text" class="form-control" id="guardianRelationshipToStudent" name="guardianRelationshipToStudent" placeholder="" 
-        value="<?php if(isset($guardianRelationshipToStudent)){echo $guardianRelationshipToStudent; }?>">
+        value="<?php if(isset($guardianRelationshipToStudent)){echo $guardianRelationshipToStudent; }?>" readonly="readonly">
     </div>
 </div>
 
 <div class="form-group">
       <label for="guardianHomeAddress" class="col-lg-3 control-label">Home Address</label>
-      <div class="col-sm-9">
+      <div class="col-sm-9" readonly="readonly">
         <textarea class="form-control" rows="3" id="guardianHomeAddress" name="guardianHomeAddress" >
          <?php if(isset($guardianHomeAddress)){echo($guardianHomeAddress); }?>
         </textarea>
@@ -254,35 +230,35 @@
 <div class="form-group">
     <label for="guardianOccupation" class="col-sm-3 control-label">Occupation</label>
     <div class="col-sm-6">
-        <input type="text" class="form-control" id="guardianOccupation" name="guardianOccupation" placeholder="" value="<?php if(isset($guardianOccupation)){echo $guardianOccupation; }?>">
+        <input type="text" class="form-control" id="guardianOccupation" name="guardianOccupation" placeholder="" value="<?php if(isset($guardianOccupation)){echo $guardianOccupation; }?>" readonly="readonly">
     </div>
 </div>
 
 <div class="form-group">
     <label for="guardianEmployerName" class="col-sm-3 control-label">Employer Name</label>
     <div class="col-sm-9">
-        <input type="text" class="form-control" id="guardianEmployerName" name="guardianEmployerName" placeholder="" value="<?php if(isset($guardianEmployerName)){echo $guardianEmployerName; }?>">
+        <input type="text" class="form-control" id="guardianEmployerName" name="guardianEmployerName" placeholder="" value="<?php if(isset($guardianEmployerName)){echo $guardianEmployerName; }?>" readonly="readonly">
     </div>
 </div>
 
 <div class="form-group">
     <label for="guardianBusinessPhone" class="col-sm-3 control-label">Business Phone</label>
     <div class="col-sm-9">
-        <input type="text" class="form-control" id="guardianBusinessPhone" name="guardianBusinessPhone" placeholder="" value="<?php if(isset($guardianBusinessPhone)){echo $guardianBusinessPhone; }?>">
+        <input type="text" class="form-control" id="guardianBusinessPhone" name="guardianBusinessPhone" placeholder="" value="<?php if(isset($guardianBusinessPhone)){echo $guardianBusinessPhone; }?>" readonly="readonly">
     </div>
 </div>
 
 <div class="form-group">
     <label for="guardianCellPhone" class="col-sm-3 control-label">Cell Phone</label>
     <div class="col-sm-9">
-        <input type="text" class="form-control" id="guardianCellPhone" name="guardianCellPhone" placeholder="" value="<?php if(isset($guardianCellPhone)){echo $guardianCellPhone; }?>">
+        <input type="text" class="form-control" id="guardianCellPhone" name="guardianCellPhone" placeholder="" value="<?php if(isset($guardianCellPhone)){echo $guardianCellPhone; }?>" readonly="readonly">
     </div>
 </div>
 
 <div class="form-group">
     <label for="guardianTelephone" class="col-sm-3 control-label">Telephone</label>
     <div class="col-sm-9">
-        <input type="text" class="form-control" id="guardianTelephone" name="guardianTelephone" placeholder="" value="<?php if(isset($guardianTelephone)){echo $guardianTelephone; }?>">
+        <input type="text" class="form-control" id="guardianTelephone" name="guardianTelephone" placeholder="" value="<?php if(isset($guardianTelephone)){echo $guardianTelephone; }?>" readonly="readonly">
     </div>
 </div>
 
@@ -291,7 +267,7 @@
     <label for="guardianEmail" class="col-sm-3 control-label">Email</label>
     <div class="col-sm-9">
         <input type="text" class="form-control" id="guardianEmail" name="guardianEmail" placeholder="" 
-        value="<?php if(isset($guardianEmail)){echo $guardianEmail; }?>">
+        value="<?php if(isset($guardianEmail)){echo $guardianEmail; }?>" readonly="readonly">
     </div>
 </div>
 
@@ -306,4 +282,4 @@
 
  <!-- /Guardian Details -->
 
- 
+ </div>

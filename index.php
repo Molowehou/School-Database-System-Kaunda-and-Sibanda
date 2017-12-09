@@ -15,7 +15,8 @@
 
 	<main>
 		<div class="main-content"> <!--main content-->
-	      <h5 class="section-title">HOME</h5>
+	      <h5 class="section-title"><i class="pe-7s-home"></i>HOME</h5>
+
         
         <?php echo display_errors(); ?>
 
@@ -29,7 +30,7 @@
 
                     foreach (getAllTeacherSubjects($user) as $user):?>
 
-                      <a href="exerciseByID.php?class=<?php echo $user['Class_ID'];?> & subject=<?php echo $user['Subject_ID'];?> & form=<?php echo $user['Form_ID'];?>" class="list-group-item"><strong><?php echo $user['Form'];echo $user['Class'] ?></strong>: <?php echo $user['SubjectName'];?></a>
+                      <a href="exerciseByID.php?class=<?php echo $user['Class_ID'];?> & subject=<?php echo $user['Subject_ID'];?> & form=<?php echo $user['Form_ID'];?>" class="list-group-item"><i class="pe-7s-albums"></i>&nbsp;<strong><?php echo $user['Form'];echo $user['Class'] ?></strong>: <?php echo $user['SubjectName'];?></a>
 
                     <?php endforeach; ?>
                        

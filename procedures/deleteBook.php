@@ -9,7 +9,7 @@ $bookId = request()->get('bookId');
 
   
 try{
-	if(!isAdmin()&& !isOwner($book['owner_id'])){
+	if(!isAdmin() || !isOwner($book['owner_id'])){
 $session->getFlashBag()->add('error', 'Not Authorized');
 redirect('books.php');
    } else {

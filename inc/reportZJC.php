@@ -1,5 +1,5 @@
-<?php
 
+<?php
 
 class PDF extends FPDF
 {
@@ -25,6 +25,8 @@ class PDF extends FPDF
       $this->Write (5, 'School Management System');
     }
 }
+
+
 
 $pdf=new PDF('P','mm','A4');
 
@@ -83,9 +85,6 @@ $pdf->SetDrawColor(50,50,100);
     $pdf->Cell(100,5,'Teachers Remarks',1,1,'',true);
 
     
-
-
-
 ?>
 
 

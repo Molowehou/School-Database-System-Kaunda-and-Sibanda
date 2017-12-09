@@ -66,11 +66,7 @@
          </div> <!-- End of column 2-->
 
 
-          <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-10">
-               <button type="submit" class="btn" id="btnSave">ADD EXERCISE</button>
-            </div>
-         </div>
+
 
 
      </div> <!-- End of Section-->
@@ -107,15 +103,28 @@
   </tbody>
 </table>
 
-      </form>
+    
 
 				
 		</div> <!--/main content-->
 	</main>
 			
 
+  <aside>
+    <H4 class="section-title"></H4>
+              
+           
+               <button type="submit" class="btn" id="btnSave">SAVE NEW EXERCISE</button>
+            
+     
 
 
+    <a  class="btn" id="btnCancel" href="index.php">Cancel</a>
+      
+    
+
+  </aside>
+  </form>
 
 		
    <?php 

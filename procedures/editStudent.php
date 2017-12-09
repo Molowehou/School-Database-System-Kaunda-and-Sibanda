@@ -43,7 +43,7 @@ try{
     $guardianBusinessPhone,$guardianCellPhone,$guardianTelephone,$guardianEmail);
 
     $session->getFlashBag()->add('success','Student information has been succesfully updated');
-    redirect('studentDashboard.php');
+    redirect('index.php');
 }
 catch(\exception $e){
 	 $session->getFlashBag()->add('error','An error occured and student information could not be updated');

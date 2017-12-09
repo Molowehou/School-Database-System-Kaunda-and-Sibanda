@@ -2,7 +2,7 @@
 .container {
         display: grid;
         height: 100vh;
-        grid-template-columns: 20% 1fr;
+        grid-template-columns: 16% 1fr 19%;
         grid-template-rows: auto 1fr 1fr 50px;
 		grid-gap:10px;
     }

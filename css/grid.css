@@ -62,7 +62,7 @@
     .container {
         display: grid;
         height: 100vh;
-        grid-template-columns: 20% 1fr 15%;
+        grid-template-columns: 16% 1fr 12%;
         grid-template-rows: auto auto 50px;
 		grid-gap:10px;
     }

@@ -3,7 +3,7 @@
  
 
       <td>
-          <span><a class="bt btn-sm btn-warning" id="deletebtn" href="/MuzindaSchoolDatabase3/procedures/DoDeleteTeacherSubject.php?exercise=<?php echo $teacherSubject['ID']; ?>">DELETE</a>
+          <span><a class="bt btn-sm btn-warning" id="btnInDelete" href="/MuzindaSchoolDatabase3/procedures/DoDeleteTeacherSubject.php?exercise=<?php echo $teacherSubject['ID']; ?>">DELETE</a>
           </span>
       </td>
 
