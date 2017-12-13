@@ -212,3 +212,9 @@ aside{
 .modal-body{
 	border-radius: 10px;
 }
+
+input[type="text"],
+ {
+	text-align: left;
+	text-indent:1px;
+}

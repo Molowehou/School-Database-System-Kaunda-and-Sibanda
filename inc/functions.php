@@ -895,6 +895,41 @@ function getExerciseByID($form,$class,$subject) {
     }
 }
 
+function getExamSummary($form,$class,$subject) {
+    global $db;
+    
+    try {
+        $query = "
+               SELECT DISTINCT ExamID,tblSubjects.[SubjectName],tblForm.[Form],tblClass.[Class],tblExams.[Year],tblExams.[Term]
+       FROM tblExams
+       Left join tblSubjects On
+       tblSubjects.[SubjectID]=tblExams.[subject_ID]
+
+       Left join tblForm On
+       tblForm.[FormID]=tblExams.[Form_ID]
+
+       Left join tblClass On
+       tblClass.[ClassID]=tblExams.[class_ID]
+
+
+       WHERE tblExams.[class_ID]=:class
+       AND tblExams.[subject_ID]=:subject
+       AND tblExams.[form_ID]=:form
+       ORDER BY ExamID,tblSubjects.[SubjectName],tblForm.[Form],tblClass.[Class]
+"; 
+
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':form',$form);
+        $stmt->bindParam(':class',$class);
+        $stmt->bindParam(':subject',$subject);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
 
 
 function getDistinctClass() {
@@ -1118,6 +1153,42 @@ function addNewExercise($NewExerciseID,$subject_ID,$form_ID,$class_ID,$student_I
     $stmt->bindParam(':HighestPossibleMark',$HighestPossibleMark);
     $stmt->bindParam(':Mark', $exerciseMark);
     $stmt->bindParam(':Comment', $exerciseComment);       
+        return $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+function addNewExam($ExamID,$subject_ID,$form_ID,$class_ID,$student_ID,$staff_ID,$HighestPossibleMark,$examMark,$examComment,$examDate,$Term,$Year,$status) {
+
+  
+
+
+    global $db; 
+    try {
+        $query = "INSERT INTO tblExams (
+       [ExamID],[subject_ID],[form_ID],
+       [class_ID],[student_ID],
+       [staff_ID],[HighestPossibleMark],[Mark],[Comment],[ExamDate],[Term],[Year],[Status])
+
+         VALUES   (:ExamID,:subject_ID,:form_ID,:class_ID,
+            :student_ID,:staff_ID,:HighestPossibleMark,:Mark,
+            :Comment,:ExamDate,:Term,:Year,:Status";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':ExamID', $ExamID);
+    $stmt->bindParam(':subject_ID', $subject_ID);
+    $stmt->bindParam(':form_ID', $form_ID);
+    $stmt->bindParam(':class_ID', $class_ID);
+    $stmt->bindParam(':student_ID',$student_ID);
+    $stmt->bindParam(':staff_ID', $staff_ID);
+$stmt->bindParam(':HighestPossibleMark',$HighestPossibleMark);
+    $stmt->bindParam(':Mark', $examMark);
+    $stmt->bindParam(':Comment', $examComment); 
+    $stmt->bindParam(':ExamDate', $examDate);
+    $stmt->bindParam(':Term', $Term); 
+    $stmt->bindParam(':Year', $Year); 
+    $stmt->bindParam(':Status', $status);    
         return $stmt->execute();
     } catch (\Exception $e) {
         throw $e;
@@ -1520,4 +1591,342 @@ function DeleteMarksTempTable() {
         throw $e;
     }
 }
+
+
+
+function getExamResults(){
+    global $db; 
+    try{ 
+        
+ $query = "SELECT student_ID,studentFirstName,studentLastName,[1] as Accounts,[20] as [Accounts Comment], [2] As Commerce,[21] as [Commerce Comment],
+                    [3] As [Business Studies],[22] as [Business Studies Comment],[4] As Mathematics,[23] as [Mathematics Comment],[5] As [Geography],[24] as [Geography Comment],
+                    [6] As Ndebele,[25] as [Ndebele Comment],[7] As English,[26] as [English Comment],[8] As Biology,[27] as [Biology Comment],[9] As [Intergrated Science],[28] as [Intergrated Science Comment],
+                    [10] As Physics,[29] as [Physics Comment],[11] As Chemistry,[29] as [Chemistry Comment],[12] As Zulu,[30] as [Zulu Comment],[13] As ICT,[31] as [Zulu Comment]
+
+  FROM 
+             ( SELECT student_ID, subject_ID, Mark
+               FROM tblExams) As BaseData
+
+               LEFT OUTER JOIN tblStudentDetails
+               ON student_ID=tblStudentDetails.[studentID]
+  PIVOT  (
+               SUM(Mark)
+               For subject_ID IN
+               ([1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12],[13],[20],[21],[22],[23],[24],[25],[26],[27],[28],[29],[30],[31],[32],[33])
+                ) as PVT";
+
+        $stmt= $db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    } catch(\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
+function getReportDetails(){
+    global $db; 
+    try{ 
+        
+ $query = "SELECT * from tblExamTemp";
+
+        $stmt= $db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    } catch(\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
+function updateTempData($student_ID,$studentFirstName,$studentLastName,$AccountsMark,$CommerceMark,$BusinessStudiesMark,
+$MathematicsMark,$GeographyMark,$NdebeleMark,$EnglishMark,
+$BiologyMark,$IntergratedScienceMark,$PhysicsMark,$ChemistryMark,$ZuluMark,$ICTMark) {
+
+    global $db; 
+    try {
+        $query = "INSERT INTO tblExamTemp (
+       student_ID,studentFirstName,studentLastName,Accounts,Commerce,[Business Studies],Mathematics,Geography,Ndebele,English,Biology,[Intergrated Science],Physics,Chemistry,Zulu,ICT)
+
+         VALUES   (:student_ID,:studentFirstName,:studentLastName,:Accounts,:Commerce,:BusinessStudies,:Mathematics,:Geography,:Ndebele,:English,:Biology,:IntergratedScience,:Physics,:Chemistry,:Zulu,:ICT)";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':student_ID', $student_ID);
+    $stmt->bindParam(':studentFirstName', $studentFirstName);
+    $stmt->bindParam(':studentLastName', $studentLastName);
+    $stmt->bindParam(':Accounts', $AccountsMark); 
+    $stmt->bindParam(':Commerce', $CommerceMark);
+    $stmt->bindParam(':BusinessStudies',$BusinessStudiesMark);
+    $stmt->bindParam(':Mathematics', $MathematicsMark);
+    $stmt->bindParam(':Geography', $GeographyMark);
+    $stmt->bindParam(':Ndebele', $NdebeleMark);
+    $stmt->bindParam(':English', $EnglishMark);
+    $stmt->bindParam(':Biology', $BiologyMark);
+$stmt->bindParam(':IntergratedScience',$IntergratedScienceMark);
+    $stmt->bindParam(':Physics', $PhysicsMark);
+    $stmt->bindParam(':Chemistry', $ChemistryMark);
+    $stmt->bindParam(':Zulu', $ZuluMark);
+    $stmt->bindParam(':ICT', $ICTMark);
+        return $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
+
+
+function getCommentByID($subject_ID) {
+    global $db;
+    
+    try {
+        $query = "SELECT Comment,student_ID 
+                  FROM tblExams
+                  Where subject_ID =:subject_ID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':subject_ID', $subject_ID);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
+//=====================Updating Temp Table======================
+
+//Update Accounts Comment
+function UpdateAccountsComment($AccountsComment,$student_ID) {
+    global $db;
+    try {
+        $query = "UPDATE tblExamTemp SET
+                  [Accounts Comment] =:AccountsComment 
+                  WHERE student_ID=:studentID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':AccountsComment', $AccountsComment); 
+        $stmt->bindParam(':studentID', $student_ID);  
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+//Update Commerce Comment
+function UpdateCommerceComment($AccountsComment,$student_ID) {
+    global $db;
+    try {
+        $query = "UPDATE tblExamTemp SET
+                  [Commerce Comment] =:AccountsComment 
+                  WHERE student_ID=:studentID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':AccountsComment', $AccountsComment); 
+        $stmt->bindParam(':studentID', $student_ID);  
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+//Update Business Studies Comment
+function UpdateBusinessStudiesComment($AccountsComment,$student_ID) {
+    global $db;
+    try {
+        $query = "UPDATE tblExamTemp SET
+                  [Business Studies Comment] =:AccountsComment 
+                  WHERE student_ID=:studentID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':AccountsComment', $AccountsComment); 
+        $stmt->bindParam(':studentID', $student_ID);  
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+//Update Mathematics Comment
+function UpdateMathematicsComment($AccountsComment,$student_ID) {
+    global $db;
+    try {
+        $query = "UPDATE tblExamTemp SET
+                  [Mathematics Comment] =:AccountsComment 
+                  WHERE student_ID=:studentID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':AccountsComment', $AccountsComment); 
+        $stmt->bindParam(':studentID', $student_ID);  
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+//Update Geography Comment
+function UpdateGeographyComment($AccountsComment,$student_ID) {
+    global $db;
+    try {
+        $query = "UPDATE tblExamTemp SET
+                  [Geography Comment] =:AccountsComment 
+                  WHERE student_ID=:studentID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':AccountsComment', $AccountsComment); 
+        $stmt->bindParam(':studentID', $student_ID);  
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+//Update Ndebele Comment
+function UpdateNdebeleComment($AccountsComment,$student_ID) {
+    global $db;
+    try {
+        $query = "UPDATE tblExamTemp SET
+                  [Ndebele Comment] =:AccountsComment 
+                  WHERE student_ID=:studentID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':AccountsComment', $AccountsComment); 
+        $stmt->bindParam(':studentID', $student_ID);  
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+//Update English Comment
+function UpdateEnglishComment($AccountsComment,$student_ID) {
+    global $db;
+    try {
+        $query = "UPDATE tblExamTemp SET
+                  [English Comment] =:AccountsComment 
+                  WHERE student_ID=:studentID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':AccountsComment', $AccountsComment); 
+        $stmt->bindParam(':studentID', $student_ID);  
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+//Update Biology Comment
+function UpdateBiologyComment($AccountsComment,$student_ID) {
+    global $db;
+    try {
+        $query = "UPDATE tblExamTemp SET
+                  [Biology Comment] =:AccountsComment 
+                  WHERE student_ID=:studentID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':AccountsComment', $AccountsComment); 
+        $stmt->bindParam(':studentID', $student_ID);  
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+//Update Intergrated Science Comment
+function UpdateIntergratedScienceComment($AccountsComment,$student_ID) {
+    global $db;
+    try {
+        $query = "UPDATE tblExamTemp SET
+                  [Intergrated Science Comment] =:AccountsComment 
+                  WHERE student_ID=:studentID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':AccountsComment', $AccountsComment); 
+        $stmt->bindParam(':studentID', $student_ID);  
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+// Update Physics  Comment
+function UpdatePhysicsComment($AccountsComment,$student_ID) {
+    global $db;
+    try {
+        $query = "UPDATE tblExamTemp SET
+                  [Physics Comment] =:AccountsComment 
+                  WHERE student_ID=:studentID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':AccountsComment', $AccountsComment); 
+        $stmt->bindParam(':studentID', $student_ID);  
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+// Update Chemistry  Comment
+function UpdateChemistryComment($AccountsComment,$student_ID) {
+    global $db;
+    try {
+        $query = "UPDATE tblExamTemp SET
+                  [Chemistry Comment] =:AccountsComment 
+                  WHERE student_ID=:studentID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':AccountsComment', $AccountsComment); 
+        $stmt->bindParam(':studentID', $student_ID);  
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+// Update Zulu Comment
+function UpdateZuluComment($AccountsComment,$student_ID) {
+    global $db;
+    try {
+        $query = "UPDATE tblExamTemp SET
+                  [Zulu Comment] =:AccountsComment 
+                  WHERE student_ID=:studentID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':AccountsComment', $AccountsComment); 
+        $stmt->bindParam(':studentID', $student_ID);  
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+// Update ICT Comment
+function UpdateICTComment($AccountsComment,$student_ID) {
+    global $db;
+    try {
+        $query = "UPDATE tblExamTemp SET
+                  [ICT Comment] =:AccountsComment 
+                  WHERE student_ID=:studentID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':AccountsComment', $AccountsComment); 
+        $stmt->bindParam(':studentID', $student_ID);  
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+function deleteTempExam() {
+    global $db;
+    try {
+        $query = "DELETE FROM tblExamTemp";
+        $stmt = $db->prepare($query);
+        return $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
+
+
+
 

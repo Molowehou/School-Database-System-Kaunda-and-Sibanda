@@ -20,4 +20,4 @@ switch (strtolower($Status)) {
 		break;
 }
 
-redirect('studentDashboard.php');
+redirect('index.php');

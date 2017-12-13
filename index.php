@@ -17,7 +17,7 @@
 		<div class="main-content"> <!--main content-->
 	      <h5 class="section-title"><i class="pe-7s-home"></i>HOME</h5>
 
-        
+        <?php echo display_success(); ?>
         <?php echo display_errors(); ?>
 
           <!-- <h5 class="section-title">Classes Taught</h5> -->

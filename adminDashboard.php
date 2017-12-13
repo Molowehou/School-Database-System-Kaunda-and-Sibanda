@@ -100,7 +100,7 @@
                    </div> <!--End of Modal div -->
 
 
-    <a class="btn" id="btnEdit" href="index.php">Main Menu</a>
+    
 
   </aside>
 

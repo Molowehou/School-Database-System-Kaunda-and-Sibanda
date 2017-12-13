@@ -124,8 +124,8 @@ textarea:hover {
 			Sidebar
 *******************************************/
 aside {
-	height: 100vh;
-	background: red;
+	/*height: 100vh;*/
+
 	
 }
 h2.sidebar_title {

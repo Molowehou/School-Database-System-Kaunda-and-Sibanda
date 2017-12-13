@@ -60,12 +60,12 @@ $buttonText = 'Save Changes';
 
 	<main>
 		<div class="main-content"> <!--main content-->
-	      <h5 class="section-title">EDIT TEACHER INFORMATION</h5>
+	      <h5 class="section-title">TEACHER REGISTRATION</h5>
           <?php echo display_errors(); ?>
 
           <form class = "form-horizontal" method= "post" action = "procedures/editTeacher.php">
           	   <input type="hidden" name="staffID" value="<?php echo $teacher['employeeStaffID'];?>"/>
-              <?php include_once __DIR__ ."/inc/teacherForm.php"; ?>
+              <?php include_once __DIR__ ."/inc/teacherForm2.php"; ?>
         
              
 
@@ -76,10 +76,10 @@ $buttonText = 'Save Changes';
 	    <aside>
        <H4 class="section-title"></H4>
 
-       <button type="submit" class="btn" id="btnSave"><i class="pe-7s-note"></i>&nbsp;Save Changes</button>
+       
 
 
-       <a class="btn" id="btnDelete" href="index.php">Cancel</a>
+       <a class="btn" id="btnSave" href="/MuzindaSchoolDatabase3/editTeacher.php?staffID=<?php echo $teacher['employeeStaffID']; ?>">Edit</a>
 
   </aside>
 

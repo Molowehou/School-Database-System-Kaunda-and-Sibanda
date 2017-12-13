@@ -87,7 +87,7 @@ $buttonText = 'Save Changes';
     
 
   <a class="btn" id="btnSave" href="/MuzindaSchoolDatabase3/editStudent.php?studentID=<?php echo $student['studentID']; ?>">Edit Student</a>
-  <a class="btn" id="btnEdit" href="index.php">Main Menu</a>
+  
 
   </aside>
 

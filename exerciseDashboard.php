@@ -103,7 +103,7 @@
 
       <a  class="btn" id="btnDelete" href="procedures/doDeleteExercise.php?ExerciseID=<?php echo $exercise['ExerciseID']; ?> & class=<?php echo $class;?> & subject=<?php echo $subject;?> & form=<?php echo $form;?>"><i class="pe-7s-trash"></i>&nbsp;Delete</a>
 
-      <a  class="btn" id="btnCancel" href="index.php"><i class="pe-7s-home"></i>&nbsp;Main Menu</a>
+      
       
   </aside>
 

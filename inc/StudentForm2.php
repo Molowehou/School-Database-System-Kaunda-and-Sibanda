@@ -11,7 +11,7 @@
 
 <div class="form-group">
     <label for="StudentID" class="col-sm-3 control-label">Student ID</label>
-    <div class="col-sm-4">
+    <div class="col-sm-6">
         <input type="text" class="form-control" id="StudentID" name="StudentID" placeholder="" value="
         <?php if(isset($studentID)){echo $studentID;} else echo generateNewStudentID();?>"
         readonly="readonly">
