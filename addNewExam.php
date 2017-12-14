@@ -45,20 +45,15 @@
 
                 <div class="form-group">
                     <label for="Title" class="col-sm-3 control-label">Year</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="Title" name="Title" value="<?php echo date("Y"); ?>" required="required" readonly="readonly">
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="Title" name="Year" value="<?php echo date("Y"); ?>" required="required" readonly="readonly">
                     </div>
                 </div>
 
           </div> <!-- End of column 1-->
 
        <div class="col-sm-6"> <!-- Column 2-->
-                <div class="form-group">
-                    <label for="Title" class="col-sm-3 control-label">Subject</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="Title" name="Subject" value="<?php echo date("Y"); ?>" required="required" readonly="readonly">
-                    </div>
-                </div>
+
 
        </div> <!-- End of column 2-->
 

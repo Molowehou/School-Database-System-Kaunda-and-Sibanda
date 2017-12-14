@@ -4,13 +4,13 @@ require_once __DIR__. '/../inc/bootstrap.php';
 requireAuth();
 
   // Exam ID
-   //$NewExerciseID=generateNewExerciseID();
+   $NewExerciseID=generateNewExamID();
    
    //Class and Form
    $class_ID=trim(request()->get('class'));
    $form_ID=trim(request()->get('form'));
    $subject_ID=trim(request()->get('subject'));
-
+   $ExamID=$NewExerciseID;
 
 
 
@@ -30,31 +30,20 @@ $x++;
 
 // Data to be added to each exercise
      $Term =trim(request()->get('Term'));
-
+     $Year =trim(request()->get('Year'));
 
    
  
 
 
 // Data from the table
-   $exerciseMark=trim(request()->get('examMark'.$x));
-   $exerciseComment=trim(request()->get('examComment'.$x));
+   $examMark=trim(request()->get('examMark'.$x));
+   $examComment=trim(request()->get('examComment'.$x));
 
 
-    echo $class_ID;
-     echo $form_ID;
-     echo $subject_ID;
-      echo $Term;
-       echo $exerciseMark;
-       echo $exerciseComment;
-      exit;
- 
-
-
-}
 
 try{
- $NewExamMark = addNewExam($ExamID,$subject_ID,$form_ID,$class_ID,$student_ID,$staff_ID,$HighestPossibleMark,$examMark,$examComment,$examDate,$Term,$Year,$status);
+ $NewExamMark = addNewExam($ExamID,$subject_ID,$form_ID,$class_ID,$student_ID,$staff_ID,$examMark,$examComment,$Term,$Year);
 
      }
 catch(\exception $e){
@@ -63,5 +52,5 @@ catch(\exception $e){
     }
 
 
-
-   redirect('exerciseByID.php?class='.$class_ID.'& subject='.$subject_ID.'& form='.$form_ID);
+}
+   redirect('examsList.php?class='.$class_ID.'& subject='.$subject_ID.'& form='.$form_ID);

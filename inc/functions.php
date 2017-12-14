@@ -969,11 +969,33 @@ function getExerciseByExerciseID($ExerciseID) {
     try {
         $query = "SELECT *,[studentID],[studentFirstName],[studentLastName]
                   FROM tblExercises
-                  RIGHT JOIN tblStudentDetails 
+                  Left JOIN tblStudentDetails 
                   ON tblExercises.[student_ID]=tblStudentDetails.[studentID]
                   WHERE tblExercises.[ExerciseID]=:ExerciseID;"; 
         $stmt = $db->prepare($query);
         $stmt->bindParam(':ExerciseID',$ExerciseID);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+function getExamByExamID($ExamID) {
+    global $db;
+    
+    try {
+        $query = "SELECT *,[studentID],[studentFirstName],[studentLastName],SubjectName
+                  FROM tblExams
+                  LEFT JOIN tblStudentDetails 
+                  ON tblExams.[student_ID]=tblStudentDetails.[studentID]
+                  LEFT JOIN tblSubjects 
+                  ON tblExams.[subject_ID]=tblSubjects.[SubjectID]
+                  WHERE tblExams.[ExamID]=:ExamID;"; 
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':ExamID',$ExamID);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -1083,6 +1105,25 @@ function findExerciseInfoByID($NewExerciseID) {
 }
 
 
+function findExamInfoByID($NewExamID) {
+    global $db;
+    
+    try {
+        $query = "SELECT *,studentFirstName,studentLastName 
+        FROM tblExams 
+        LEFT JOIN tblStudentDetails
+        ON tblExams.[student_ID]=tblStudentDetails.[studentID]
+        WHERE tblExams.[ExamID] =:ExamID";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':ExamID', $NewExamID);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+        
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
 
 
 function getLastExerciseID(){
@@ -1111,6 +1152,54 @@ function generateNewExerciseID(){
         throw $e;
     }
 }
+
+
+
+
+function getLastExamID(){
+    global $db; 
+    try{ 
+
+    $query = "SELECT TOP 1 ExamID FROM tblExams ORDER BY ExamID DESC";
+
+        $stmt= $db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch(\Exception $e) {
+        throw $e;
+    }
+}
+
+function generateNewExamID(){
+    global $db; 
+    try{ 
+
+    foreach (getLastExamID() as $LastExamID) {
+        $NewExamID=$LastExamID+1;
+    }
+        return $NewExamID;
+    } catch(\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function findLastExerciseID(){
     global $db; 
@@ -1160,9 +1249,49 @@ function addNewExercise($NewExerciseID,$subject_ID,$form_ID,$class_ID,$student_I
 }
 
 
-function addNewExam($ExamID,$subject_ID,$form_ID,$class_ID,$student_ID,$staff_ID,$HighestPossibleMark,$examMark,$examComment,$examDate,$Term,$Year,$status) {
 
-  
+function addNewExam($ExamID,$subject_ID,$form_ID,$class_ID,$student_ID,$staff_ID,$examMark,$examComment,$Term,$Year) {
+
+$HighestPossibleMark=100;
+$status =1;
+//$ExamID=1;
+
+
+    global $db; 
+    try {
+        $query = "INSERT INTO tblExams (ExamID,[subject_ID],[form_ID],
+       [class_ID],[student_ID],[staff_ID],HighestPossibleMark,Mark,Comment,ExamDate,Term,Year,Status)
+
+         VALUES   (:ExamID,:subject_ID,:form_ID,:class_ID,
+            :student_ID,:staff_ID,:HighestPossibleMark,:Mark,:Comment,GETDATE(),:Term,:Year,:Status)";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':ExamID', $ExamID);
+    $stmt->bindParam(':subject_ID', $subject_ID);
+    $stmt->bindParam(':form_ID', $form_ID);
+    $stmt->bindParam(':class_ID', $class_ID);
+    $stmt->bindParam(':student_ID',$student_ID);
+    $stmt->bindParam(':staff_ID', $staff_ID);
+    $stmt->bindParam(':HighestPossibleMark',$HighestPossibleMark);
+    $stmt->bindParam(':Mark', $examMark);
+    $stmt->bindParam(':Comment', $examComment); 
+   // $stmt->bindParam(':ExamDate', $examDate);
+    $stmt->bindParam(':Term', $Term); 
+    $stmt->bindParam(':Year', $Year); 
+    $stmt->bindParam(':Status', $status);    
+        return $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
+
+
+
+function addNewExam1($ExamID,$subject_ID,$form_ID,$class_ID,$student_ID,$staff_ID,$HighestPossibleMark,$examMark,$examComment,$examDate,$Term,$Year,$status) {
+
+
 
 
     global $db; 
@@ -1172,9 +1301,9 @@ function addNewExam($ExamID,$subject_ID,$form_ID,$class_ID,$student_ID,$staff_ID
        [class_ID],[student_ID],
        [staff_ID],[HighestPossibleMark],[Mark],[Comment],[ExamDate],[Term],[Year],[Status])
 
-         VALUES   (:ExamID,:subject_ID,:form_ID,:class_ID,
+         VALUES   (1,:subject_ID,:form_ID,:class_ID,
             :student_ID,:staff_ID,:HighestPossibleMark,:Mark,
-            :Comment,:ExamDate,:Term,:Year,:Status";
+            :Comment,GETDATE(),:Term,GETDATE('Y'),:Status";
     $stmt = $db->prepare($query);
     $stmt->bindParam(':ExamID', $ExamID);
     $stmt->bindParam(':subject_ID', $subject_ID);
@@ -1228,6 +1357,40 @@ function addNewTempExercise($ExerciseID,$subject_ID,$form_ID,$class_ID,$student_
     }
 }
 
+
+function addNewTempExam($ExamID,$subject_ID,$form_ID,$class_ID,$student_ID,$staff_ID,$HighestPossibleMark,$examMark,$examComment,$Term,$Year) {
+    $Status=1;
+    $HighestPossibleMark=100;
+
+    global $db; 
+    try {
+        $query = "INSERT INTO [tblExamTempTable] (
+       [ExamID],[subject_ID],[form_ID],[class_ID],[student_ID],
+[staff_ID],[HighestPossibleMark],[Mark],[Comment],[ExamDate],
+       [Term],[Year],[Status])
+
+         VALUES   (:ExamID,:subject_ID,:form_ID,:class_ID,
+            :student_ID,:staff_ID,:HighestPossibleMark,:Mark,
+            :Comment,GETDATE(),:Term,:Year,:Status)";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':ExamID', $ExamID);
+    $stmt->bindParam(':subject_ID', $subject_ID);
+    $stmt->bindParam(':form_ID', $form_ID);
+    $stmt->bindParam(':class_ID', $class_ID);
+    $stmt->bindParam(':student_ID',$student_ID);
+    $stmt->bindParam(':staff_ID', $staff_ID);
+    $stmt->bindParam(':HighestPossibleMark',$HighestPossibleMark);
+    $stmt->bindParam(':Mark', $examMark);
+    $stmt->bindParam(':Comment', $examComment);
+    $stmt->bindParam(':Term', $Term); 
+    $stmt->bindParam(':Year', $Year); 
+    $stmt->bindParam(':Status', $Status);       
+        
+        return $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
 
 
 
@@ -1560,6 +1723,34 @@ function UpdateTable() {
 
 
 
+function UpdateExamTable() {
+    global $db;
+    try {
+        $query = "UPDATE
+    tblExams
+   SET
+    tblExams.[Mark] = tblExamTempTable.[Mark],
+    tblExams.[Comment] = tblExamTempTable.[Comment],
+    tblExams.[ExamDate] = tblExamTempTable.[ExamDate],
+    tblExams.[Term] = tblExamTempTable.[Term],
+    tblExams.[Year] = tblExamTempTable.[Year],
+    tblExams.[Status] = tblExamTempTable.[Status],
+    tblExams.[HighestPossibleMark] = tblExamTempTable.[HighestPossibleMark]
+  FROM
+     tblExams 
+  INNER JOIN
+    tblExamTempTable
+  ON 
+    tblExams.[student_ID] = tblExamTempTable.[student_ID]";
+        $stmt = $db->prepare($query); 
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
 function CreateMarksTempTable() {
     global $db;
     try {
@@ -1580,6 +1771,36 @@ function CreateMarksTempTable() {
 
 
 
+function CreateExamTempTable() {
+    global $db;
+    try {
+        $query = "CREATE TABLE [dbo].[tblExamTempTable](
+    [ID] [int] IDENTITY(1,1) NOT NULL,
+    [ExamID] [int] NULL,
+    [subject_ID] [int] NULL,
+    [form_ID] [int] NULL,
+    [class_ID] [int] NULL,
+    [student_ID] [nvarchar](50) NULL,
+    [staff_ID] [nvarchar](50) NULL,
+    [HighestPossibleMark] [int] NULL,
+    [Mark] [int] NULL,
+    [Comment] [nvarchar](1000) NULL,
+    [ExamDate] [nvarchar](50) NULL,
+    [Term] [int] NULL,
+    [Year] [nchar](10) NULL,
+    [Status] [nchar](10) NULL
+)";
+        $stmt = $db->prepare($query); 
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
+
+
 function DeleteMarksTempTable() {
     global $db;
     try {
@@ -1591,6 +1812,20 @@ function DeleteMarksTempTable() {
         throw $e;
     }
 }
+
+
+function DeleteExamTempTable() {
+    global $db;
+    try {
+        $query = "IF OBJECT_ID('tblExamTempTable', 'U') IS NOT NULL 
+  DROP TABLE dbo.tblExamTempTable";
+        $stmt = $db->prepare($query); 
+         $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
 
 
 

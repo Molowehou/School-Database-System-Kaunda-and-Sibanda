@@ -3,9 +3,7 @@
       <tr>
       <td>
          <p>
-          <span><a class="bt btn-sm btn-success"  id="editbtn" href="exerciseDashboard.php?ExerciseID=<?php echo $exercise['ExerciseID'];?>"><i class="pe-7s-bookmarks"></i>&nbsp;View</a></span>
-            <!-- <span><a class="bt btn-sm btn-warning" id="editbtn" href="editExercise.php?ExerciseID=<?php //echo $exercise['ExerciseID']; ?>">EDIT</a></span> -->
-            <!-- <span><a class="bt btn-sm btn-warning" id="deletebtn" href="">Delete</a></span> -->
+          <span><a class="bt btn-sm btn-success"  id="editbtn" href="examDashboard.php?ExamID=<?php echo $exam['ExamID'];?>"><i class="pe-7s-bookmarks"></i>&nbsp;View</a></span>
          </p>
       </td>
 
