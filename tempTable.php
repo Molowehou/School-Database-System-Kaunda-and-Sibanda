@@ -103,7 +103,26 @@
           $pdf->AddPage();
 
 
-         $pdf->SetFont('Helvetica','',9);
+//School Logo
+    $pdf->SetFillColor(300);
+    $pdf->RoundedRect(8,7, 195, 285,5, '1234', 'DF');
+
+   $pdf->Image('Reports/logo.png',10,10,30);
+  
+
+      $pdf->SetFont('Helvetica','B',30);
+      $pdf->SetXY(30, 10);
+      //Report Name
+      $pdf->Cell(0,8,'HIGHER LEARNING CENTRE',0,1,'C');
+
+      //Dummmy Cell to give spacing
+       
+
+      $pdf->SetFont('Helvetica','B',15);
+      $pdf->Cell(0,10,'END OF TERM PROGRESS REPORT',0,0,'C');
+
+
+         $pdf->SetFont('Helvetica','',12);
          $pdf->SetDrawColor(50,50,100);
 
          //Dummmy Cell to give spacing
@@ -113,134 +132,159 @@
         $pdf->SetDrawColor(50,50,100);
         
         //Draw Table
-        $pdf->Cell(25,5,'Name',1,0,'',true);
-        $pdf->Cell(60,5,$studentExam['studentFirstName'],1,0,'',true);
-        $pdf->Cell(15,5,'',0,0,'',true);
-        $pdf->Cell(25,5,'Surname',1,0,'',true);
-        $pdf->Cell(65,5,$studentExam['studentLastName'],1,1,'',true);
+        $pdf->Cell(30,8,'Name',1,0,'');
+        $pdf->Cell(65,8,$studentExam['studentFirstName'],1,0,'');
+        $pdf->Cell(5,8,'',0,0,'');
+        $pdf->Cell(25,8,'Surname',1,0,'');
+        $pdf->Cell(66,8,$studentExam['studentLastName'],1,1,'');
 
        //Dummmy Cell to give spacing
         $pdf->Ln(2);
   
-        $pdf->Cell(20,5,'Year',1,0,'',true);
-        $pdf->Cell(30,5,'2018',1,0,'',true);
-        $pdf->Cell(15,5,'',0,0,'',true);
-        $pdf->Cell(20,5,'Term',1,0,'',true);
-        $pdf->Cell(40,5,'1',1,0,'',true);
-        $pdf->Cell(15,5,'',0,0,'',true);
-        $pdf->Cell(20,5,'Form',1,0,'',true);
-        $pdf->Cell(30,5,$studentExam['student_ID'],1,1,'',true);
+        $pdf->Cell(30,8,'Year',1,0,'');
+        $pdf->Cell(30,8,'2018',1,0,'');
+        $pdf->Cell(5,8,'',0,0,'');
+        $pdf->Cell(36,8,'Term',1,0,'');
+        $pdf->Cell(30,8,'1',1,0,'');
+        $pdf->Cell(5,8,'',0,0,'');
+        $pdf->Cell(30,8,'Form',1,0,'');
+        $pdf->Cell(25,8,'',1,1,'');
 
 
        //Dummmy Cell to give spacing
          $pdf->Ln(2);
   
-         $pdf->Cell(30,5,'Attendance',1,0,'',true);
-         $pdf->Cell(30,5,'',1,0,'',true);
-         $pdf->Cell(5,5,'',0,0,'',true);
-         $pdf->Cell(36,5,'Average Mark(%)',1,0,'',true);
-         $pdf->Cell(30,5,'',1,0,'',true);
-         $pdf->Cell(5,5,'',0,0,'',true);
-         $pdf->Cell(30,5,'Total Points',1,0,'',true);
-         $pdf->Cell(25,5,'',1,1,'',true);
+         $pdf->Cell(30,8,'Attendance',1,0,'');
+         $pdf->Cell(30,8,'',1,0,'');
+         $pdf->Cell(5,8,'',0,0,'');
+         $pdf->Cell(36,8,'Average Mark(%)',1,0,'');
+         $pdf->Cell(30,8,'',1,0,'');
+         $pdf->Cell(5,8,'',0,0,'');
+         $pdf->Cell(30,8,'Total Points',1,0,'');
+         $pdf->Cell(25,8,'',1,1,'');
 
     //Dummmy Cell to give spacing
-        $pdf->Ln(5);
+        $pdf->Ln(8);
 
      //Draw Table
-        $pdf->Cell(50,5,'Subject',1,0,'',true);
-        $pdf->Cell(30,5,'Course Mark',1,0,'',true);
-        $pdf->Cell(20,5,'Grade',1,0,'',true);
-        $pdf->Cell(80,5,'Teachers Remarks',1,1,'',true);
+        $pdf->Cell(50,8,'Subject',1,0,'',true);
+        $pdf->Cell(30,8,'Course Mark',1,0,'',true);
+        $pdf->Cell(20,8,'Grade',1,0,'',true);
+        $pdf->Cell(91,8,'Teachers Remarks',1,1,'',true);
 
 
 
 
 
-          $pdf->SetFont('Arial','B',12);
+          $pdf->SetFont('Helvetica','B',12);
           //Accounts
-          $pdf->Cell(50,5,'Accounts',1,0,'');
-          $pdf->Cell(30,5,$studentExam['Accounts'],1);
-          $pdf->Cell(20,5,'',1);
-          $pdf->Cell(80,5,$studentExam['Accounts Comment'],1,1);
+          $pdf->Cell(50,8,'Accounts',1,0,'');
+          $pdf->Cell(30,8,$studentExam['Accounts'],1);
+          $pdf->Cell(20,8,'',1);
+          $pdf->Cell(91,8,$studentExam['Accounts Comment'],1,1);
           
           //Commerce
-          $pdf->Cell(50,5,'Commerce',1,0,'');
-          $pdf->Cell(30,5,$studentExam['Commerce'],1);
-          $pdf->Cell(20,5,'',1);
-          $pdf->Cell(80,5,$studentExam['Commerce Comment'],1,1);
+          $pdf->Cell(50,8,'Commerce',1,0,'');
+          $pdf->Cell(30,8,$studentExam['Commerce'],1);
+          $pdf->Cell(20,8,'',1);
+          $pdf->Cell(91,8,$studentExam['Commerce Comment'],1,1);
           
           //Business Studies
-          $pdf->Cell(50,5,'Business Studies',1,0,'');
-          $pdf->Cell(30,5,$studentExam['Business Studies'],1);
-          $pdf->Cell(20,5,'',1);
-          $pdf->Cell(80,5,$studentExam['Business Studies Comment'],1,1);
+          $pdf->Cell(50,8,'Business Studies',1,0,'');
+          $pdf->Cell(30,8,$studentExam['Business Studies'],1);
+          $pdf->Cell(20,8,'',1);
+          $pdf->Cell(91,8,$studentExam['Business Studies Comment'],1,1);
 
           //Mathematics
 
-          $pdf->Cell(50,5,'Mathematics',1,0,'');
-          $pdf->Cell(30,5,$studentExam['Mathematics'],1);
-          $pdf->Cell(20,5,'',1);
-          $pdf->Cell(80,5,$studentExam['Mathematics Comment'],1,1);           
+          $pdf->Cell(50,8,'Mathematics',1,0,'');
+          $pdf->Cell(30,8,$studentExam['Mathematics'],1);
+          $pdf->Cell(20,8,'',1);
+          $pdf->Cell(91,8,$studentExam['Mathematics Comment'],1,1);           
           //Geography
-          $pdf->Cell(50,5,'Geography',1,0,'');
-          $pdf->Cell(30,5,$studentExam['Geography'],1);
-          $pdf->Cell(20,5,'',1);
-          $pdf->Cell(80,5,$studentExam['Geography Comment'],1,1);                    
+          $pdf->Cell(50,8,'Geography',1,0,'');
+          $pdf->Cell(30,8,$studentExam['Geography'],1);
+          $pdf->Cell(20,8,'',1);
+          $pdf->Cell(91,8,$studentExam['Geography Comment'],1,1);                    
           //Ndebele
-          $pdf->Cell(50,5,'Ndebele',1,0,'');
-          $pdf->Cell(30,5,$studentExam['Ndebele'],1);
-          $pdf->Cell(20,5,'',1);
-          $pdf->Cell(80,5,$studentExam['Ndebele Comment'],1,1);
+          $pdf->Cell(50,8,'Ndebele',1,0,'');
+          $pdf->Cell(30,8,$studentExam['Ndebele'],1);
+          $pdf->Cell(20,8,'',1);
+          $pdf->Cell(91,8,$studentExam['Ndebele Comment'],1,1);
           
           //English
-          $pdf->Cell(50,5,'English',1,0,'');
-          $pdf->Cell(30,5,$studentExam['English'],1);
-          $pdf->Cell(20,5,'',1);
-          $pdf->Cell(80,5,$studentExam['English Comment'],1,1);          
+          $pdf->Cell(50,8,'English',1,0,'');
+          $pdf->Cell(30,8,$studentExam['English'],1);
+          $pdf->Cell(20,8,'',1);
+          $pdf->Cell(91,8,$studentExam['English Comment'],1,1);          
           //Biology
-          $pdf->Cell(50,5,'Biology',1,0,'');
-          $pdf->Cell(30,5,$studentExam['Biology'],1);
-          $pdf->Cell(20,5,'',1);
-          $pdf->Cell(80,5,$studentExam['Biology Comment'],1,1);
+          $pdf->Cell(50,8,'Biology',1,0,'');
+          $pdf->Cell(30,8,$studentExam['Biology'],1);
+          $pdf->Cell(20,8,'',1);
+          $pdf->Cell(91,8,$studentExam['Biology Comment'],1,1);
 
           //Intergrated Science
-         $pdf->Cell(50,5,'Intergrated Science',1,0,'');
-         $pdf->Cell(30,5,$studentExam['Intergrated Science'],1);
-         $pdf->Cell(20,5,'',1);
-         $pdf->Cell(80,5,$studentExam['Intergrated Science Comment'],1,1);
+         $pdf->Cell(50,8,'Intergrated Science',1,0,'');
+         $pdf->Cell(30,8,$studentExam['Intergrated Science'],1);
+         $pdf->Cell(20,8,'',1);
+         $pdf->Cell(91,8,$studentExam['Intergrated Science Comment'],1,1);
 
 
         //Physics
-        $pdf->Cell(50,5,'Physics',1,0,'');
-        $pdf->Cell(30,5,$studentExam['Physics'],1);
-        $pdf->Cell(20,5,'',1);
-        $pdf->Cell(80,5,$studentExam['Physics Comment'],1,1); 
+        $pdf->Cell(50,8,'Physics',1,0,'');
+        $pdf->Cell(30,8,$studentExam['Physics'],1);
+        $pdf->Cell(20,8,'',1);
+        $pdf->Cell(91,8,$studentExam['Physics Comment'],1,1); 
 
 
 
           //Chemistry
-          $pdf->Cell(50,5,'Chemistry',1,0,'');
-          $pdf->Cell(30,5,$studentExam['Chemistry'],1);
-          $pdf->Cell(20,5,'',1);
-          $pdf->Cell(80,5,$studentExam['Chemistry Comment'],1,1);
+          $pdf->Cell(50,8,'Chemistry',1,0,'');
+          $pdf->Cell(30,8,$studentExam['Chemistry'],1);
+          $pdf->Cell(20,8,'',1);
+          $pdf->Cell(91,8,$studentExam['Chemistry Comment'],1,1);
 
           //Zulu
-          $pdf->Cell(50,5,'Zulu',1,0,'');
-          $pdf->Cell(30,5,$studentExam['Zulu'],1);
-          $pdf->Cell(20,5,'',1);
-          $pdf->Cell(80,5,$studentExam['Zulu Comment'],1,1);         
+          $pdf->Cell(50,8,'Zulu',1,0,'');
+          $pdf->Cell(30,8,$studentExam['Zulu'],1);
+          $pdf->Cell(20,8,'',1);
+          $pdf->Cell(91,8,$studentExam['Zulu Comment'],1,1);         
 
           //ICT
-          $pdf->Cell(50,5,'ICT',1,0,'');
-          $pdf->Cell(30,5,$studentExam['ICT'],1);
-          $pdf->Cell(20,5,'',1);
-          $pdf->Cell(80,5,$studentExam['ICT Comment'],1,1);
+          $pdf->Cell(50,8,'ICT',1,0,'');
+          $pdf->Cell(30,8,$studentExam['ICT'],1);
+          $pdf->Cell(20,8,'',1);
+          $pdf->Cell(91,8,$studentExam['ICT Comment'],1,1);
 
+//Class Teachers Comments
+     $pdf->SetFont('Helvetica','B',12);
+      
+      $pdf->SetXY(10,195);
+      $pdf->Cell(55,7,'Class Teacher Comment',1);
+      $pdf->Cell(136,7,'C',1,1);
+
+      $pdf->SetXY(96,203);
+      $pdf->Cell(55,7,'Class Teacher Signature',1);
+      $pdf->Cell(50,7,'C',1,1);
+
+
+
+      $pdf->SetXY(10,211);
+      $pdf->Cell(55,7,'Head Comment',1);
+      $pdf->Cell(136,7,'C',1,1);
+
+      $pdf->SetXY(96,219);
+      $pdf->Cell(55,7,'Head Signature',1);
+      $pdf->Cell(50,7,'C',1,1);
+
+
+      $pdf->SetXY(75,229);
+      $pdf->Cell(70,40,'STAMP',1);
+          
 
            
          
-         $pdf->Output('F',$studentExam['student_ID']);
+      $pdf->Output('F',$studentExam['student_ID']);
 
 
 

@@ -1,7 +1,7 @@
 <?php
 require __DIR__. '/../fpdf/fpdf.php';
 require_once __DIR__. '/../inc/bootstrap.php';
-
+require_once __DIR__. '/../Reports/rounded_rect2.php';
 class PDF extends FPDF
 {
   function Header()
