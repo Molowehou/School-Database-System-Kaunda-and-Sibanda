@@ -618,6 +618,30 @@ function addBook($title, $description) {
 }
 
 
+function addNewNotice($noticeTitle,$noticeMessage,$staff_ID) {
+    global $db;
+
+    $status=1;
+      
+
+    try {
+        $query = "INSERT INTO tblNotices (Title,Message,staff_ID,created_at,Status) VALUES (:Title, :Message, :staff_ID,GETDATE(),:Status)";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':Title', $noticeTitle);
+        $stmt->bindParam(':Message', $noticeMessage);
+        $stmt->bindParam(':staff_ID', $staff_ID);
+        $stmt->bindParam(':Status', $status);
+        return $stmt->execute();
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
+
+
+
 
 function getAllBooks(){
     global $db; 
@@ -755,6 +779,24 @@ function getAllUsers() {
         throw $e;
     }
 }
+
+
+function getAllNotices() {
+    global $db;
+    
+    try {
+    $query = "SELECT * FROM tblNotices WHERE status=1";
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+
 
 
 
@@ -1065,7 +1107,7 @@ function findStudentByStudentID($studentID) {
 
 
 
-function findExerciseByID($NewExerciseID) {
+function findExerciseByID($ExerciseID) {
     global $db;
     
     try {
@@ -1075,7 +1117,7 @@ function findExerciseByID($NewExerciseID) {
         ON tblExercises.[student_ID]=tblStudentDetails.[studentID]
         WHERE tblExercises.[ExerciseID] =:ExerciseID";
         $stmt = $db->prepare($query);
-        $stmt->bindParam(':ExerciseID', $NewExerciseID);
+        $stmt->bindParam(':ExerciseID', $ExerciseID);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
         
@@ -1713,7 +1755,8 @@ function UpdateTable() {
   INNER JOIN
     tblExerciseTempTable
   ON 
-    tblExercises.[student_ID] = tblExerciseTempTable.[student_ID]";
+    tblExercises.[ExerciseID] = tblExerciseTempTable.[ExerciseID]
+    AND tblExercises.[student_ID] = tblExerciseTempTable.[student_ID] ";
         $stmt = $db->prepare($query); 
          $stmt->execute();
     } catch (\Exception $e) {
@@ -1741,7 +1784,8 @@ function UpdateExamTable() {
   INNER JOIN
     tblExamTempTable
   ON 
-    tblExams.[student_ID] = tblExamTempTable.[student_ID]";
+    tblExams.[ExamID] = tblExamTempTable.[ExamID]
+  AND tblExams.[student_ID] = tblExamTempTable.[student_ID]";
         $stmt = $db->prepare($query); 
          $stmt->execute();
     } catch (\Exception $e) {

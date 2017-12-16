@@ -34,6 +34,9 @@ $HighestPossibleMark= trim(request()->get('HighestPossibleMark'));
    $exerciseMark=trim(request()->get('exerciseMark'.$x));
    $exerciseComment=trim(request()->get('exerciseComment'.$x));
 
+ 
+
+
 
 
 //Error Handlers

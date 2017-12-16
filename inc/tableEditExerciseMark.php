@@ -21,8 +21,8 @@
       </td>
 
        <td>
-        <input type="text" class="form-control" id="exerciseMark<?php echo $i  ?>" name="exerciseComment<?php echo $i  ?>"
-         value="<?php $exercise['Comment'] ?>">
+        <input type="text" class="form-control" id="exerciseComment<?php echo $i  ?>" name="exerciseComment<?php echo $i  ?>"
+         value="<?php echo $exercise['Comment'] ?>">
       </td>
 
        

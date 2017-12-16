@@ -105,66 +105,80 @@
 
 //School Logo
     $pdf->SetFillColor(300);
+    $pdf->SetDrawColor(128,0,128);
     $pdf->RoundedRect(8,7, 195, 285,5, '1234', 'DF');
 
-   $pdf->Image('Reports/logo.png',10,10,30);
+   $pdf->Image('Reports/logo.png',10,20,30);
   
 
       $pdf->SetFont('Helvetica','B',30);
-      $pdf->SetXY(30, 10);
+      $pdf->SetTextColor(128,128,128);
+      $pdf->SetXY(30, 20);
       //Report Name
+
       $pdf->Cell(0,8,'HIGHER LEARNING CENTRE',0,1,'C');
 
       //Dummmy Cell to give spacing
-       
+        $pdf->Ln(8);
 
       $pdf->SetFont('Helvetica','B',15);
+      $pdf->SetTextColor(128,0,128);
       $pdf->Cell(0,10,'END OF TERM PROGRESS REPORT',0,0,'C');
 
 
-         $pdf->SetFont('Helvetica','',12);
-         $pdf->SetDrawColor(50,50,100);
 
+      $pdf->Line(10,50,200,50);
+
+
+      $pdf->SetTextColor(128,128,128);
          //Dummmy Cell to give spacing
-        $pdf->Ln(25);
+        $pdf->Ln(18);
         $pdf->SetFont('Helvetica','B',12);
         $pdf->SetFillColor(180,180,255);
-        $pdf->SetDrawColor(50,50,100);
+        $pdf->SetDrawColor(128,128,128);
         
         //Draw Table
         $pdf->Cell(30,8,'Name',1,0,'');
-        $pdf->Cell(65,8,$studentExam['studentFirstName'],1,0,'');
+        $pdf->Cell(65,8,$studentExam['studentFirstName'],0,0,'');
         $pdf->Cell(5,8,'',0,0,'');
-        $pdf->Cell(25,8,'Surname',1,0,'');
-        $pdf->Cell(66,8,$studentExam['studentLastName'],1,1,'');
+        $pdf->Cell(25,8,'Surname',0,0,'');
+        $pdf->Cell(66,8,$studentExam['studentLastName'],0,1,'');
 
        //Dummmy Cell to give spacing
         $pdf->Ln(2);
   
-        $pdf->Cell(30,8,'Year',1,0,'');
-        $pdf->Cell(30,8,'2018',1,0,'');
+        $pdf->Cell(30,8,'Year',0,0,'');
+        $pdf->Cell(30,8,'2018',0,0,'');
         $pdf->Cell(5,8,'',0,0,'');
-        $pdf->Cell(36,8,'Term',1,0,'');
-        $pdf->Cell(30,8,'1',1,0,'');
+        $pdf->Cell(36,8,'Term',0,0,'');
+        $pdf->Cell(30,8,'1',0,0,'');
         $pdf->Cell(5,8,'',0,0,'');
-        $pdf->Cell(30,8,'Form',1,0,'');
-        $pdf->Cell(25,8,'',1,1,'');
+        $pdf->Cell(30,8,'Form',0,0,'');
+        $pdf->Cell(25,8,'',0,1,'');
 
 
        //Dummmy Cell to give spacing
          $pdf->Ln(2);
   
-         $pdf->Cell(30,8,'Attendance',1,0,'');
-         $pdf->Cell(30,8,'',1,0,'');
+         $pdf->Cell(30,8,'Attendance',0,0,'');
+         $pdf->Cell(30,8,'',0,0,'');
          $pdf->Cell(5,8,'',0,0,'');
-         $pdf->Cell(36,8,'Average Mark(%)',1,0,'');
-         $pdf->Cell(30,8,'',1,0,'');
+         $pdf->Cell(36,8,'Average Mark(%)',0,0,'');
+         $pdf->Cell(30,8,'',0,0,'');
          $pdf->Cell(5,8,'',0,0,'');
-         $pdf->Cell(30,8,'Total Points',1,0,'');
-         $pdf->Cell(25,8,'',1,1,'');
+         $pdf->Cell(30,8,'Total Points',0,0,'');
+         $pdf->Cell(25,8,'',0,1,'');
+
+         //Dummmy Cell to give spacing
+         $pdf->Ln(2);
+         $pdf->Cell(136,8,'',0,0,'');
+         $pdf->Cell(30,8,'Class Position',0,0,'');
+         $pdf->Cell(25,8,'',0,1,'');
 
     //Dummmy Cell to give spacing
-        $pdf->Ln(8);
+         $pdf->Line(10,95,200,95);
+
+        $pdf->Ln(6);
 
      //Draw Table
         $pdf->Cell(50,8,'Subject',1,0,'',true);
@@ -256,32 +270,41 @@
           $pdf->Cell(20,8,'',1);
           $pdf->Cell(91,8,$studentExam['ICT Comment'],1,1);
 
+          $pdf->Ln(3);
 //Class Teachers Comments
      $pdf->SetFont('Helvetica','B',12);
       
-      $pdf->SetXY(10,195);
-      $pdf->Cell(55,7,'Class Teacher Comment',1);
-      $pdf->Cell(136,7,'C',1,1);
+      //$pdf->SetXY(10,206);
+      $pdf->Cell(57,7,"Class Teacher's Comment",1);
+      $pdf->Cell(134,7,'',1,1);
 
-      $pdf->SetXY(96,203);
-      $pdf->Cell(55,7,'Class Teacher Signature',1);
-      $pdf->Cell(50,7,'C',1,1);
-
-
-
-      $pdf->SetXY(10,211);
-      $pdf->Cell(55,7,'Head Comment',1);
-      $pdf->Cell(136,7,'C',1,1);
-
-      $pdf->SetXY(96,219);
-      $pdf->Cell(55,7,'Head Signature',1);
-      $pdf->Cell(50,7,'C',1,1);
+      $pdf->Ln(2);
+      //$pdf->SetXY(96,214);
+      $pdf->Cell(89,7,'');
+      $pdf->Cell(54,7,"Class Teacher's Signature",1);
+      $pdf->Cell(48,7,'',1,1);
 
 
-      $pdf->SetXY(75,229);
-      $pdf->Cell(70,40,'STAMP',1);
-          
+      $pdf->Ln(3);
+      //$pdf->SetXY(10,222);
+      $pdf->Cell(55,7,"Head's Comment",1);
+      $pdf->Cell(136,7,'',1,1);
 
+      $pdf->Ln(2);
+      //$pdf->SetXY(96,230);
+      $pdf->Cell(93,7,'');
+      $pdf->Cell(48,7,"Head's Signature",1);
+      $pdf->Cell(50,7,'',1,1);
+
+      $pdf->SetDrawColor(128,0,128);
+      //$pdf->SetXY(77,238);
+      //$pdf->Cell(70,35,'STAMP',0);
+
+      //$pdf->SetFillColor(30);
+      //$pdf->RoundedRect(75,238, 75, 38,5, '1234', 'FD'); 
+       $pdf->Ln(6);
+       $pdf->Cell(67,8,'');
+       $pdf->Cell(50,22,'SCHOOL STAMP',1,1,'C');
            
          
       $pdf->Output('F',$studentExam['student_ID']);

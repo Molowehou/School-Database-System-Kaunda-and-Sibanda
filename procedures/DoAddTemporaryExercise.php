@@ -4,7 +4,7 @@ require_once __DIR__. '/../inc/bootstrap.php';
 //requireAuth();
 
   // ExerciseID
-   $NewExerciseID=generateNewExerciseID();
+   //$NewExerciseID=generateNewExerciseID();
    
    //Class
    $ExerciseID=trim(request()->get('exercise'));
@@ -14,6 +14,8 @@ require_once __DIR__. '/../inc/bootstrap.php';
 
 //Creation of the temp Data Table
    CreateMarksTempTable();
+
+
 
 $x=0;
 foreach (getClassByID($form_ID,$class_ID) as $student) {
@@ -61,6 +63,7 @@ catch(\exception $e){
     }
 
 }
+
 
 
  UpdateTable();

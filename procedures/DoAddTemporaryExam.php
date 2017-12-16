@@ -4,7 +4,7 @@ require_once __DIR__. '/../inc/bootstrap.php';
 //requireAuth();
 
   // ExerciseID
-   $NewExamID=generateNewExamID();
+   //$NewExamID=generateNewExamID();
    
    //Class
    $ExamID=trim(request()->get('exam'));
